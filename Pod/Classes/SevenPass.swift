@@ -1,0 +1,237 @@
+//
+//  SevenPass.swift
+//  SevenPass
+//
+//  Created by Jan Votava on 15/12/15.
+//  Copyright © 2015 Jan Votava. All rights reserved.
+//
+
+import OAuthSwift
+import JWTDecode
+
+public let OAuthJWTErrorDomain = "OAuthJWTErrorDomain"
+
+public class SevenPass: NSObject {
+    public let configuration: SevenPassConfiguration
+    var oauthswift: OAuth2Swift!
+    var urlHandler: OAuthSwiftURLHandlerType!
+
+    public init(configuration: SevenPassConfiguration) {
+        self.configuration = configuration
+        self.urlHandler = SevenPassWebViewController(urlString: configuration.callbackUri)
+    }
+
+    private func loadJwt(jwt: String, consumerKey: String? = nil) throws -> JWT {
+        let jwt = try decode(jwt)
+
+        guard !jwt.expired else {
+            let error = NSError(domain:OAuthJWTErrorDomain, code:0, userInfo:[NSLocalizedDescriptionKey: "Token is expired"])
+
+            throw error
+        }
+
+        if let consumerKey = consumerKey {
+            guard jwt.audience!.contains(consumerKey) else {
+                let error = NSError(domain:OAuthJWTErrorDomain, code:0, userInfo:[NSLocalizedDescriptionKey: "Token has invalid audience"])
+
+                throw error
+            }
+        }
+
+        return jwt
+    }
+
+    public class func handleOpenURL(url: NSURL) {
+        return OAuth2Swift.handleOpenURL(url)
+    }
+
+    func sevenpassClient(accessToken: String, basePath: String) -> SevenPassClient {
+        let client = SevenPassClient(consumerKey: self.configuration.consumerKey, consumerSecret: self.configuration.consumerSecret)
+
+        client.baseUri = NSURL(string: "\(self.configuration.host)\(basePath)")!
+        client.accessToken = accessToken
+
+        return client
+    }
+
+    public func accountClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
+        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
+
+        return sevenpassClient(accessToken, basePath: "/api/accounts/")
+    }
+
+    public func deviceCredentialsClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
+        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
+
+        return sevenpassClient(accessToken, basePath: "/api/client/")
+    }
+
+    func initOauthSwift() {
+        let config = self.configuration.config
+
+        var responseType = "code"
+
+        // Implicit flow when secret is not present
+        if self.configuration.consumerSecret.isEmpty {
+            responseType = "id_token+token"
+        }
+
+        let oauthSwift = OAuth2Swift(
+            consumerKey:    self.configuration.consumerKey,
+            consumerSecret: self.configuration.consumerSecret,
+            authorizeUrl:   config["authorization_endpoint"] as! String,
+            accessTokenUrl: config["token_endpoint"] as! String,
+            responseType:   responseType
+        )
+
+        oauthSwift.authorize_url_handler = self.urlHandler
+        self.oauthswift = oauthSwift
+    }
+
+    func loadResponse(parameters: NSDictionary, login: String = "") throws -> SevenPassTokenSet {
+        let tokenSet = SevenPassTokenSet()
+
+        if let accessToken = parameters["access_token"] as? String {
+            var expiresIn: NSTimeInterval = 120 // Default expire to 2 minutes
+
+            // Implicit flow
+            if let expires = parameters["expires_in"] as? String { // Implicit flow
+                expiresIn = NSTimeInterval(expires)! - NSTimeInterval(60)
+            } else if let expires = parameters["expires_in"] as? Int { // Authorization code flow
+                expiresIn = NSTimeInterval(expires) - NSTimeInterval(60)
+            }
+
+            tokenSet.accessToken = SevenPassToken(token: accessToken, expiresIn: expiresIn)
+        }
+
+        if let refreshToken = parameters["refresh_token"] as? String {
+            let expiresIn = NSTimeInterval(90 * 24 * 60 * 60) - NSTimeInterval(60) // 90 days - 60s
+
+            tokenSet.refreshToken = SevenPassToken(token: refreshToken, expiresIn: expiresIn)
+        }
+
+        if let idToken = parameters["id_token"] as? String {
+            tokenSet.idToken = idToken
+            let jwt = try self.loadJwt(idToken, consumerKey: self.configuration.consumerKey)
+            tokenSet.idTokenDecoded = jwt.body
+        }
+
+        return tokenSet
+    }
+
+    public func authorize(var parameters parameters: Dictionary<String, String>, success: SevenPassTokenSet -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        configuration.fetch(
+            success: {
+                self.initOauthSwift()
+
+                let config = self.configuration.config
+
+                parameters["client_id"] = self.configuration.consumerKey
+                parameters["client_secret"] = self.configuration.consumerSecret
+
+                let successHandler: OAuthSwiftHTTPRequest.SuccessHandler = { data, response in
+                    let json: Dictionary<String, AnyObject>
+
+                    do {
+                        json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
+                    } catch let error as NSError {
+                        failure(error)
+
+                        return
+                    }
+
+                    let tokenSet: SevenPassTokenSet
+
+                    do {
+                        tokenSet = try self.loadResponse(json)
+                    } catch let error as NSError {
+                        failure(error)
+
+                        return
+                    }
+
+                    success(tokenSet)
+                }
+
+                self.oauthswift.client.request(config["token_endpoint"] as! String,
+                    method: .POST,
+                    parameters: parameters,
+                    success: successHandler,
+                    failure: failure
+                )
+            },
+            failure: failure
+        )
+    }
+
+    public func authorize(scopes scopes: Array<String>, var params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        configuration.fetch(
+            success: {
+                self.initOauthSwift()
+
+                params["nonce"] = OAuthSwiftCredential.generateNonce()
+
+                self.oauthswift.authorizeWithCallbackURL(
+                    NSURL(string: self.configuration.callbackUri)!,
+                    scope: scopes.joinWithSeparator("+"), state: "",
+                    params: params,
+                    success: { credential, response, parameters in
+                        let tokenSet: SevenPassTokenSet
+
+                        do {
+                            tokenSet = try self.loadResponse(parameters)
+                        } catch let error as NSError {
+                            failure(error)
+
+                            return
+                        }
+
+                        success(tokenSet: tokenSet)
+                    },
+                    failure: failure
+                )
+            },
+            failure: failure
+        )
+    }
+
+    public func authorize(login login: String, password: String, scopes: Array<String>, success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        authorize(
+            parameters: [
+                "grant_type": "password",
+                "scope": scopes.joinWithSeparator(" "),
+
+                "login": login,
+                "password": password
+            ],
+            success: success,
+            failure: failure
+        )
+    }
+    
+    public func authorize(refreshToken refreshToken: String, success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        authorize(
+            parameters: [
+                "grant_type": "refresh_token",
+                
+                "refresh_token": refreshToken
+            ],
+            success: success,
+            failure: failure
+        )
+    }
+
+    public func authorize(providerName providerName: String, accessToken: String, scopes: Array<String>, success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        authorize(
+            parameters: [
+                "grant_type": "social",
+                "scope": scopes.joinWithSeparator(" "),
+
+                "provider_name": providerName,
+                "access_token": accessToken
+            ],
+            success: success,
+            failure: failure
+        )
+    }
+}
