@@ -17,6 +17,7 @@
 		9D3C0448ADA35F2F419FB0EE /* Pods_SevenPass_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF3FBECB5A6A58B51045BCB /* Pods_SevenPass_Tests.framework */; };
 		C4D9F05DAD07EC4AFA2B4BC8 /* Pods_SevenPass_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03096E1D4776C91D670D0716 /* Pods_SevenPass_Example.framework */; };
 		DB1C43921C3C04700002386B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1C43911C3C04700002386B /* LoginViewController.swift */; };
+		DB352FDC1C574ECD00B1EF98 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB352FDB1C574ECD00B1EF98 /* Util.swift */; };
 		DB5B0E701C3FFAEE00E6FA9E /* SsoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5B0E6F1C3FFAEE00E6FA9E /* SsoManager.swift */; };
 		DB5B0E721C400AA000E6FA9E /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5B0E711C400AA000E6FA9E /* RegistrationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		90391B29D407AB62F05FEA01 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BCB6934F8E4078F5D3FEE60A /* Pods-SevenPass_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPass_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPass_Example/Pods-SevenPass_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DB1C43911C3C04700002386B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DB352FDB1C574ECD00B1EF98 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		DB5B0E6F1C3FFAEE00E6FA9E /* SsoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SsoManager.swift; sourceTree = "<group>"; };
 		DB5B0E711C400AA000E6FA9E /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		DC1C24377311CD8DEBF2193A /* Pods-SevenPass_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPass_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPass_Tests/Pods-SevenPass_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				DB352FDB1C574ECD00B1EF98 /* Util.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				DB5B0E711C400AA000E6FA9E /* RegistrationViewController.swift */,
 				DB5B0E6F1C3FFAEE00E6FA9E /* SsoManager.swift */,
@@ -373,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB1C43921C3C04700002386B /* LoginViewController.swift in Sources */,
+				DB352FDC1C574ECD00B1EF98 /* Util.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				DB5B0E701C3FFAEE00E6FA9E /* SsoManager.swift in Sources */,

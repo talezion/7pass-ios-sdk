@@ -22,6 +22,23 @@ class ViewController: UIViewController, UITabBarDelegate {
         }
     }
     
+    @IBAction func refresh(sender: AnyObject) {
+        if let refreshTokenString = SsoManager.sharedInstance.tokenSet?.refreshToken?.token {
+            SsoManager.sharedInstance.sso.authorize(refreshToken: refreshTokenString,
+                success: { tokenSet in
+                    SsoManager.sharedInstance.updateTokenSet(tokenSet)
+                },
+                failure: errorHandler
+            )
+        }
+    }
+
+    @IBAction func logout(sender: AnyObject) {
+        SsoManager.sharedInstance.updateTokenSet(nil)
+        clearCookieStorage()
+        updateStatusbar()
+    }
+
     private func removeInactiveViewController(inactiveViewController: UIViewController?) {
         if let inActiveVC = inactiveViewController {
             // call before removing child view controller's view from hierarchy
@@ -66,6 +83,8 @@ class ViewController: UIViewController, UITabBarDelegate {
         // Select first tab
         activeViewController = webViewController
         tabBarView.selectedItem = tabBarView.items![0]
+
+        updateStatusbar()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,5 +92,24 @@ class ViewController: UIViewController, UITabBarDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    func clearCookieStorage() {
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+
+        for cookie in cookieStorage.cookies! {
+            cookieStorage.deleteCookie(cookie)
+        }
+    }
+
+    func updateStatusbar() {
+        if let tokenSet = SsoManager.sharedInstance.tokenSet {
+            logoutButton.enabled = true
+            refreshButton.enabled = true
+            statusbar.title = tokenSet.email
+        } else {
+            logoutButton.enabled = false
+            refreshButton.enabled = false
+            statusbar.title = nil
+        }
+    }
 }
 

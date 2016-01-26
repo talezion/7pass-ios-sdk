@@ -12,6 +12,8 @@ class SsoManager {
     static let sharedInstance = SsoManager()
 
     let sso: SevenPass
+    var tokenSetCache: SevenPassTokenSetCache!
+    var tokenSet: SevenPassTokenSet?
 
     init() {
         let configuration = SevenPassConfiguration(
@@ -22,5 +24,19 @@ class SsoManager {
         )
 
         self.sso = SevenPass(configuration: configuration)
+
+        tokenSetCache = SevenPassTokenSetCache(configuration: sso.configuration)
+        tokenSet = tokenSetCache.load()
+    }
+
+    func updateTokenSet(tokenSet: SevenPassTokenSet?) {
+        self.tokenSet = tokenSet
+        tokenSetCache.tokenSet = tokenSet
+
+        if tokenSet == nil {
+            tokenSetCache.delete()
+        } else {
+            tokenSetCache.save()
+        }
     }
 }
