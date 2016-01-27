@@ -121,10 +121,7 @@ class RegistrationViewController: UIViewController {
                 "password": self.password.text!,
                 "flags": [
                     "client": [
-                        "id": self.sso.configuration.consumerKey,
-                        "agb": true,
-                        "dsb": true,
-                        "implicit": true
+                        "id": self.sso.configuration.consumerKey
                     ]
                 ]
             ],

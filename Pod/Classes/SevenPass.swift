@@ -8,6 +8,7 @@
 
 import OAuthSwift
 import JWTDecode
+import JWT
 
 public let OAuthJWTErrorDomain = "OAuthJWTErrorDomain"
 
@@ -42,7 +43,7 @@ public class SevenPass: NSObject {
     }
 
     public class func handleOpenURL(url: NSURL) {
-        return OAuth2Swift.handleOpenURL(url)
+        return OAuthSwift.handleOpenURL(url)
     }
 
     func sevenpassClient(accessToken: String, basePath: String) -> SevenPassClient {
@@ -67,21 +68,17 @@ public class SevenPass: NSObject {
     }
 
     func initOauthSwift() {
-        let config = self.configuration.config
-
-        var responseType = "code"
-
-        // Implicit flow when secret is not present
-        if self.configuration.consumerSecret.isEmpty {
-            responseType = "id_token+token"
+        if self.oauthswift != nil {
+            return
         }
+
+        let config = self.configuration.config
 
         let oauthSwift = OAuth2Swift(
             consumerKey:    self.configuration.consumerKey,
             consumerSecret: self.configuration.consumerSecret,
             authorizeUrl:   config["authorization_endpoint"] as! String,
-            accessTokenUrl: config["token_endpoint"] as! String,
-            responseType:   responseType
+            accessTokenUrl: config["token_endpoint"] as! String
         )
 
         oauthSwift.authorize_url_handler = self.urlHandler
@@ -171,6 +168,17 @@ public class SevenPass: NSObject {
 
                 params["nonce"] = OAuthSwiftCredential.generateNonce()
 
+                if params["response_type"] == nil {
+                    var responseType = "code"
+
+                    // Implicit flow when secret is not present
+                    if self.configuration.consumerSecret.isEmpty {
+                        responseType = "id_token+token"
+                    }
+
+                    params["response_type"] = responseType
+                }
+
                 self.oauthswift.authorizeWithCallbackURL(
                     NSURL(string: self.configuration.callbackUri)!,
                     scope: scopes.joinWithSeparator("+"), state: "",
@@ -208,12 +216,12 @@ public class SevenPass: NSObject {
             failure: failure
         )
     }
-    
+
     public func authorize(refreshToken refreshToken: String, success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
         authorize(
             parameters: [
                 "grant_type": "refresh_token",
-                
+
                 "refresh_token": refreshToken
             ],
             success: success,
@@ -230,6 +238,32 @@ public class SevenPass: NSObject {
                 "provider_name": providerName,
                 "access_token": accessToken
             ],
+            success: success,
+            failure: failure
+        )
+    }
+
+    public func autologin(tokenSet: SevenPassTokenSet, scopes: Array<String>, rememberMe: Bool, var params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
+        guard let idToken = tokenSet.idToken else { fatalError("idToken is missing") }
+
+        let payload: Dictionary<String, AnyObject> = [
+            "access_token": accessToken,
+            "id_token": idToken,
+            "remember_me": rememberMe
+        ]
+
+        let autologin = encode(payload, algorithm: .HS256(configuration.consumerSecret))
+
+        params["autologin"] = autologin
+
+        if params["response_type"] == nil {
+            params["response_type"] = "none"
+        }
+
+        authorize(
+            scopes: scopes,
+            params: params,
             success: success,
             failure: failure
         )

@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'SevenPass_Example' do
   pod "SevenPass", :path => "../"
+  pod "OAuthSwift", :git => "https://github.com/p7s1-ctf/OAuthSwift.git", :branch => "p7-changes"
 end
 
 target 'SevenPass_Tests' do

@@ -39,7 +39,7 @@ public class SevenPassClient {
 
         let authenticator = Authenticator.HMAC(key: Array(self.consumerSecret.utf8), variant: HMAC.Variant.sha256)
         
-        return try! self.accessToken.authenticate(authenticator)
+        return self.accessToken.authenticate(authenticator)
     }
 
     // MARK: client methods

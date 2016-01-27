@@ -84,11 +84,21 @@
                                     <action selector="webview:" destination="lzC-bg-seg" eventType="touchUpInside" id="ozD-av-Yoe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9r-Rx-rWz">
+                                <rect key="frame" x="237" y="94" width="127" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Autologin"/>
+                                <connections>
+                                    <action selector="autologin:" destination="lzC-bg-seg" eventType="touchUpInside" id="bAA-af-LE4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mj9-9e-sXO" firstAttribute="centerX" secondItem="wiv-an-yYW" secondAttribute="centerX" id="1ge-9f-jyv"/>
                             <constraint firstItem="mj9-9e-sXO" firstAttribute="top" secondItem="k4d-hE-UNK" secondAttribute="bottom" constant="27" id="7NT-bt-rzX"/>
+                            <constraint firstItem="Y9r-Rx-rWz" firstAttribute="top" secondItem="mj9-9e-sXO" secondAttribute="bottom" constant="20" id="L0M-5n-x1D"/>
+                            <constraint firstItem="Y9r-Rx-rWz" firstAttribute="centerX" secondItem="wiv-an-yYW" secondAttribute="centerX" id="hgG-0e-vdp"/>
                         </constraints>
                     </view>
                 </viewController>

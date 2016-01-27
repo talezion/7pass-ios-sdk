@@ -40,7 +40,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             failure: errorHandler
         )
     }
-    
+
+    @IBAction func autologin(sender: AnyObject) {
+        if let tokenSet = SsoManager.sharedInstance.tokenSet {
+            sso.autologin(tokenSet,
+                scopes: ["openid", "profile", "email"],
+                rememberMe: false,
+                success: { token in
+                    showAlert(title: "Autologin", message: "Successfully autologged in")
+                },
+                failure: errorHandler
+            )
+        } else {
+            showAlert(title: "TokenSet missing", message: "Cannot autologin user without tokenSet")
+        }
+    }
+
     @IBAction func loginPasswordLogin(sender: AnyObject) {
         sso.authorize(login: login.text!, password: password.text!,
             scopes: ["openid", "profile", "email"],
