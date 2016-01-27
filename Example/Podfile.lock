@@ -2,7 +2,7 @@ PODS:
   - AwesomeCache (2.0)
   - CryptoSwift (0.2.2)
   - JWTDecode (1.0.0)
-  - Locksmith (2.0.5)
+  - Locksmith (2.0.6)
   - Nimble (3.0.0)
   - OAuthSwift (0.4.8)
   - Quick (0.8.0)
@@ -20,13 +20,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   SevenPass:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   AwesomeCache: 5d6839ad139cdcee3c3a067f6fc1849523867dd9
   CryptoSwift: d382228d6301c09474132417878a741c2a2e68cd
   JWTDecode: d172edcb1607cc15aed85d58eceedcbb675a4534
-  Locksmith: 6b527f58b7223e469a4b30d42d65ec9fcbf28c97
+  Locksmith: 42ec3d535448e3c218f4342782b07a222b1acfd1
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   OAuthSwift: 23bd4807a4fd9e54ef6e7c2b5875138819186d9a
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab

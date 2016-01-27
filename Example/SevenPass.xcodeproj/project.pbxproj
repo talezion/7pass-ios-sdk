@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		67A2DBDB1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A2DBDA1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift */; };
 		9D3C0448ADA35F2F419FB0EE /* Pods_SevenPass_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF3FBECB5A6A58B51045BCB /* Pods_SevenPass_Tests.framework */; };
 		C4D9F05DAD07EC4AFA2B4BC8 /* Pods_SevenPass_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03096E1D4776C91D670D0716 /* Pods_SevenPass_Example.framework */; };
 		DB1C43921C3C04700002386B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1C43911C3C04700002386B /* LoginViewController.swift */; };
@@ -45,6 +46,7 @@
 		607FACE51AFB9204008FA782 /* SevenPass_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SevenPass_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		67A2DBDA1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SevenPassIntegrationTests.swift; sourceTree = "<group>"; };
 		70345B3E596D26D6D40178D0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		757E300516C60FD9155DCD69 /* Pods-SevenPass_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPass_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPass_Example/Pods-SevenPass_Example.release.xcconfig"; sourceTree = "<group>"; };
 		90391B29D407AB62F05FEA01 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				67A2DBDA1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
@@ -382,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				67A2DBDB1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
