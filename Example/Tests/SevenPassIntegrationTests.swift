@@ -26,6 +26,8 @@ class SevenPassIntegration: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - Tokens
+    
     func testPasswordLogin() {
         let expectation = expectationWithDescription("Password Login")
         
@@ -73,6 +75,8 @@ class SevenPassIntegration: XCTestCase {
         waitForExpectationsWithTimeout(10) { _ in }
     }
     
+    // MARK: - Account
+    
     func testAccountDetails() {
         let expectation = expectationWithDescription("Get Account Details")
         
@@ -104,6 +108,8 @@ class SevenPassIntegration: XCTestCase {
         waitForExpectationsWithTimeout(10) { _ in }
     }
     
+    // MARK: - Email
+    
     func testEmailIsTaken() {
         let expectation = expectationWithDescription("Email is taken")
         
@@ -126,6 +132,8 @@ class SevenPassIntegration: XCTestCase {
         waitForExpectationsWithTimeout(10) { _ in }
     }
     
+    // MARK: - Passwords
+    
     func testPasswordIsValid() {
         let expectation = expectationWithDescription("Password is valid")
         
@@ -143,6 +151,47 @@ class SevenPassIntegration: XCTestCase {
         fetchPasswordValidity("12345") { isValid in
             XCTAssertFalse(isValid)
             expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
+    // MARK: - Registration
+    
+    func testRegistration() {
+        let expectation = expectationWithDescription("Register new user")
+        
+        let randAccountSuffix = 2000 + arc4random_uniform(UInt32.max)
+        
+        fetchCredentials { deviceClient in
+            deviceClient.post("registration",
+                parameters: [
+                    "email": "prosiebendigital+\(randAccountSuffix)@gmail.com",
+                    "password": self.testPassword,
+                    "flags": [
+                        "client": [
+                            "id": self.sevenPass.configuration.consumerKey,
+                            "agb": true,
+                            "dsb": true,
+                            "implicit": true
+                        ]
+                    ]
+                ],
+                success: { json, response in
+                    if let
+                        data = json["data"] as? [String: AnyObject],
+                        registered = data["registered"] as? Bool {
+                            XCTAssertTrue(registered)
+                    } else {
+                        XCTFail("Not registered.")
+                    }
+                    expectation.fulfill()
+                },
+                failure: { error in
+                    XCTFail(error.localizedDescription)
+                    expectation.fulfill()
+                }
+            )
         }
         
         waitForExpectationsWithTimeout(10) { _ in }
