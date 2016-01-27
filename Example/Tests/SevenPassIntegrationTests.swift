@@ -126,6 +126,28 @@ class SevenPassIntegration: XCTestCase {
         waitForExpectationsWithTimeout(10) { _ in }
     }
     
+    func testPasswordIsValid() {
+        let expectation = expectationWithDescription("Password is valid")
+        
+        fetchPasswordValidity("kunftiger7") { isValid in
+            XCTAssertTrue(isValid)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
+    func testPasswordIsInvalid() {
+        let expectation = expectationWithDescription("Password is invalid")
+        
+        fetchPasswordValidity("12345") { isValid in
+            XCTAssertFalse(isValid)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
     // MARK: - Helper methods
     
     private func authorize(completion: SevenPassTokenSet -> Void) {
@@ -142,13 +164,13 @@ class SevenPassIntegration: XCTestCase {
         )
     }
     
-    private func authorizeCredentials(completion: SevenPassTokenSet -> Void) {
+    private func fetchCredentials(completion: SevenPassClient -> Void) {
         sevenPass.authorize(
             parameters: [
                 "grant_type": "client_credentials",
             ],
             success: { tokenSet in
-                completion(tokenSet)
+                completion(self.sevenPass.deviceCredentialsClient(tokenSet))
             },
             failure: { error in
                 XCTFail(error.localizedDescription)
@@ -157,9 +179,7 @@ class SevenPassIntegration: XCTestCase {
     }
     
     private func fetchEmailAvailability(email: String, completion: Bool -> Void) {
-        authorizeCredentials { authTokenSet in
-            let deviceClient = self.sevenPass.deviceCredentialsClient(authTokenSet)
-            
+        fetchCredentials { deviceClient in
             deviceClient.post("checkMail",
                 parameters: [
                     "email": email,
@@ -168,11 +188,32 @@ class SevenPassIntegration: XCTestCase {
                     ]
                 ],
                 success: { json, response in
-                    print("json", json)
                     if let
                         data = json["data"] as? [String: AnyObject],
                         available = data["available"] as? Bool {
                             completion(available)
+                    } else {
+                        XCTFail("Invalid json.")
+                    }
+                },
+                failure: { error in
+                    XCTFail(error.localizedDescription)
+                }
+            )
+        }
+    }
+    
+    private func fetchPasswordValidity(password: String, completion: Bool -> Void) {
+        fetchCredentials { deviceClient in
+            deviceClient.post("checkPassword",
+                parameters: [
+                    "password": password
+                ],
+                success: { json, response in
+                    if let
+                        data = json["data"] as? [String: AnyObject],
+                        valid = data["accepted"] as? Bool {
+                            completion(valid)
                     } else {
                         XCTFail("Invalid json.")
                     }
