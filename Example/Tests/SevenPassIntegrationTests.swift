@@ -41,6 +41,7 @@ class SevenPassIntegration: XCTestCase {
             },
             failure: { error in
                 XCTFail(error.localizedDescription)
+                expectation.fulfill()
             }
         )
         
@@ -64,6 +65,7 @@ class SevenPassIntegration: XCTestCase {
                 },
                 failure: { error in
                     XCTFail(error.localizedDescription)
+                    expectation.fulfill()
                 }
             )
         }
@@ -94,8 +96,31 @@ class SevenPassIntegration: XCTestCase {
                 },
                 failure: { error in
                     XCTFail(error.localizedDescription)
+                    expectation.fulfill()
                 }
             )
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
+    func testEmailIsTaken() {
+        let expectation = expectationWithDescription("Email is taken")
+        
+        fetchEmailAvailability(testUsername) { isAvailable in
+            XCTAssertFalse(isAvailable)
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
+    func testEmailIsAvailable() {
+        let expectation = expectationWithDescription("Email is available")
+        
+        fetchEmailAvailability("prosiebendigital+42@gmail.com") { isAvailable in
+            XCTAssertTrue(isAvailable)
+            expectation.fulfill()
         }
         
         waitForExpectationsWithTimeout(10) { _ in }
@@ -115,6 +140,48 @@ class SevenPassIntegration: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         )
+    }
+    
+    private func authorizeCredentials(completion: SevenPassTokenSet -> Void) {
+        sevenPass.authorize(
+            parameters: [
+                "grant_type": "client_credentials",
+            ],
+            success: { tokenSet in
+                completion(tokenSet)
+            },
+            failure: { error in
+                XCTFail(error.localizedDescription)
+            }
+        )
+    }
+    
+    private func fetchEmailAvailability(email: String, completion: Bool -> Void) {
+        authorizeCredentials { authTokenSet in
+            let deviceClient = self.sevenPass.deviceCredentialsClient(authTokenSet)
+            
+            deviceClient.post("checkMail",
+                parameters: [
+                    "email": email,
+                    "flags": [
+                        "client_id": self.sevenPass.configuration.consumerKey
+                    ]
+                ],
+                success: { json, response in
+                    print("json", json)
+                    if let
+                        data = json["data"] as? [String: AnyObject],
+                        available = data["available"] as? Bool {
+                            completion(available)
+                    } else {
+                        XCTFail("Invalid json.")
+                    }
+                },
+                failure: { error in
+                    XCTFail(error.localizedDescription)
+                }
+            )
+        }
     }
     
 }
