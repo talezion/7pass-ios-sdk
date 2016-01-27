@@ -50,7 +50,12 @@ class SevenPassIntegration: XCTestCase {
     func testRefreshToken() {
         let expectation = expectationWithDescription("Refresh Token")
         
-        fetchTokens { accessToken, refreshToken in
+        authorize { authTokenSet in
+            guard let refreshToken = authTokenSet.refreshToken?.token else {
+                XCTFail("Refresh token not set")
+                return
+            }
+            
             self.sevenPass.authorize(refreshToken: refreshToken,
                 success: { tokenSet in
                     XCTAssertNotNil(tokenSet.accessToken?.token)
@@ -66,21 +71,45 @@ class SevenPassIntegration: XCTestCase {
         waitForExpectationsWithTimeout(10) { _ in }
     }
     
+    func testAccountDetails() {
+        let expectation = expectationWithDescription("Get Account Details")
+        
+        authorize { authTokenSet in
+            let accountClient = self.sevenPass.accountClient(authTokenSet)
+            
+            accountClient.get("me",
+                success: { json, response in
+                    guard let
+                        status = json["status"] as? String,
+                        data = json["data"] as? [String: AnyObject],
+                        email = data["email"] as? String,
+                        _ = data["email_verified"] as? String else {
+                            XCTFail("JSON response invalid.")
+                            return
+                    }
+                    
+                    XCTAssertEqual(status, "success")
+                    XCTAssertEqual(email, self.testUsername)
+                    expectation.fulfill()
+                },
+                failure: { error in
+                    XCTFail(error.localizedDescription)
+                }
+            )
+        }
+        
+        waitForExpectationsWithTimeout(10) { _ in }
+    }
+    
     // MARK: - Helper methods
     
-    private func fetchTokens(completion: (accessToken: String, refreshToken: String) -> Void) {
+    private func authorize(completion: SevenPassTokenSet -> Void) {
         sevenPass.authorize(
             login: testUsername,
             password: testPassword,
             scopes: ["openid", "profile", "email"],
             success: { tokenSet in
-                guard let
-                    token = tokenSet.accessToken?.token,
-                    refreshToken = tokenSet.refreshToken?.token else {
-                        XCTFail("Token not set.")
-                        return
-                }
-                completion((accessToken: token, refreshToken: refreshToken))
+                completion(tokenSet)
             },
             failure: { error in
                 XCTFail(error.localizedDescription)
