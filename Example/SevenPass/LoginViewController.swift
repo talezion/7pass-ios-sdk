@@ -65,7 +65,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 self.request()
             },
-            failure: errorHandler
+            failure: { error in
+                // Let autologin handle interaction_required errors
+                if let errorMessage = error.userInfo["error"] as? String where errorMessage == "interaction_required" {
+                    let autologinToken = error.userInfo["autologin_token"] as! String
+
+                    self.sso.autologin(
+                        autologinToken: autologinToken,
+                        scopes: ["openid", "profile", "email"],
+                        params: ["response_type": "id_token+token"],
+                        success: { tokenSet in
+                            SsoManager.sharedInstance.updateTokenSet(tokenSet)
+                            self.mainView?.updateStatusbar()
+
+                            self.request()
+                        },
+                        failure: errorHandler
+                    )
+                } else {
+                    errorHandler(error)
+                }
+            }
         )
     }
     

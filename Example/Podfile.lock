@@ -26,11 +26,11 @@ EXTERNAL SOURCES:
     :branch: p7-changes
     :git: https://github.com/p7s1-ctf/OAuthSwift.git
   SevenPass:
-    :path: ../
+    :path: "../"
 
 CHECKOUT OPTIONS:
   OAuthSwift:
-    :commit: a897df96c9427f5ad69f357dccee61a8bc590289
+    :commit: 1de43966d0338bf7a6c779dfcbb41aadbf3a639a
     :git: https://github.com/p7s1-ctf/OAuthSwift.git
 
 SPEC CHECKSUMS:

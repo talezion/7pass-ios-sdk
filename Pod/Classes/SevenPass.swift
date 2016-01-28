@@ -243,19 +243,9 @@ public class SevenPass: NSObject {
         )
     }
 
-    public func autologin(tokenSet: SevenPassTokenSet, scopes: Array<String>, rememberMe: Bool, var params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
-        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
-        guard let idToken = tokenSet.idToken else { fatalError("idToken is missing") }
+    public func autologin(autologinToken autologinToken: String, scopes: Array<String>, var params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
 
-        let payload: Dictionary<String, AnyObject> = [
-            "access_token": accessToken,
-            "id_token": idToken,
-            "remember_me": rememberMe
-        ]
-
-        let autologin = encode(payload, algorithm: .HS256(configuration.consumerSecret))
-
-        params["autologin"] = autologin
+        params["autologin"] = autologinToken
 
         if params["response_type"] == nil {
             params["response_type"] = "none"
@@ -267,5 +257,20 @@ public class SevenPass: NSObject {
             success: success,
             failure: failure
         )
+    }
+
+    public func autologin(tokenSet: SevenPassTokenSet, scopes: Array<String>, rememberMe: Bool, params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
+        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
+        guard let idToken = tokenSet.idToken else { fatalError("idToken is missing") }
+
+        let payload: Dictionary<String, AnyObject> = [
+            "access_token": accessToken,
+            "id_token": idToken,
+            "remember_me": rememberMe
+        ]
+
+        let autologinToken = encode(payload, algorithm: .HS256(configuration.consumerSecret))
+
+        autologin(autologinToken: autologinToken, scopes: scopes, params: params, success: success, failure: failure)
     }
 }
