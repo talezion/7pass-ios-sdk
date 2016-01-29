@@ -35,7 +35,8 @@ class ViewController: UIViewController, UITabBarDelegate {
 
     @IBAction func logout(sender: AnyObject) {
         SsoManager.sharedInstance.updateTokenSet(nil)
-        clearCookieStorage()
+        SsoManager.sharedInstance.sso.destroyWebviewSession(failure: errorHandler)
+
         updateStatusbar()
     }
 
@@ -90,14 +91,6 @@ class ViewController: UIViewController, UITabBarDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func clearCookieStorage() {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-
-        for cookie in cookieStorage.cookies! {
-            cookieStorage.deleteCookie(cookie)
-        }
     }
 
     func updateStatusbar() {

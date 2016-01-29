@@ -15,7 +15,7 @@ public let OAuthJWTErrorDomain = "OAuthJWTErrorDomain"
 public class SevenPass: NSObject {
     public let configuration: SevenPassConfiguration
     var oauthswift: OAuth2Swift!
-    var urlHandler: OAuthSwiftURLHandlerType!
+    public var urlHandler: SevenPassURLHandlerType!
 
     public init(configuration: SevenPassConfiguration) {
         self.configuration = configuration
@@ -272,5 +272,17 @@ public class SevenPass: NSObject {
         let autologinToken = encode(payload, algorithm: .HS256(configuration.consumerSecret))
 
         autologin(autologinToken: autologinToken, scopes: scopes, params: params, success: success, failure: failure)
+    }
+
+    public func destroyWebviewSession(success success: (() -> Void)? = nil, failure: SevenPassConfiguration.FailureHandler) {
+        configuration.fetch(
+            success: {
+                let config = self.configuration.config
+                let endSessionEndpoint = config["end_session_endpoint"] as! String
+
+                self.urlHandler.destroySession(NSURL(string: endSessionEndpoint)!)
+            },
+            failure: failure
+        )
     }
 }

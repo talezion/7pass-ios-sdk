@@ -3,7 +3,7 @@ import WebKit
 
 typealias WebView = WKWebView
 
-class SevenPassWebViewController: OAuthWebViewController, WKNavigationDelegate {
+public class SevenPassWebViewController: OAuthWebViewController, SevenPassURLHandlerType, WKNavigationDelegate {
     var targetURL: NSURL = NSURL()
     var webView: WebView = WebView()
     var toolbar: UIToolbar!
@@ -19,7 +19,7 @@ class SevenPassWebViewController: OAuthWebViewController, WKNavigationDelegate {
         dismissWebViewController()
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         webView.navigationDelegate = self
@@ -56,7 +56,7 @@ class SevenPassWebViewController: OAuthWebViewController, WKNavigationDelegate {
         loadAddressURL()
     }
     
-    override func handle(url: NSURL) {
+    override public func handle(url: NSURL) {
         targetURL = url
         super.handle(url)
         
@@ -66,35 +66,15 @@ class SevenPassWebViewController: OAuthWebViewController, WKNavigationDelegate {
     func loadAddressURL() {
         let req = NSMutableURLRequest(URL: targetURL)
 
-        // Workarround to pass cookies from the shared cookie storage
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = storage.cookies ?? []
-        var headers = NSHTTPCookie.requestHeaderFieldsWithCookies(cookies)
-
-        if headers["Cookie"] == nil {
-            headers["Cookie"] = ""
-        }
-
-        req.allHTTPHeaderFields = headers
-
         self.webView.loadRequest(req)
     }
 
-    // Workarround to save cookies to the shared cookie storage
-    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-        let response = navigationResponse.response as! NSHTTPURLResponse
-        let headers = response.allHeaderFields as! Dictionary<String, String>
-        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headers, forURL: response.URL!)
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-
-        for cookie in cookies {
-            storage.setCookie(cookie)
-        }
-
-        decisionHandler(.Allow);
+    public func destroySession(logoutUrl: NSURL) {
+        // Remove all 7pass.sess* cookies on a correct domain
+        webView.loadHTMLString("<script type=\"text/javascript\">document.cookie.match(/7pass\\.sess[a-za-z0-9.]*/gi).forEach(function(cookieName) { document.cookie = cookieName + '=; path=/; domain=' + document.domain + '; expires=' + new Date(0).toUTCString(); })</script>", baseURL: logoutUrl)
     }
 
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if let dismissUrl = dismissUrl {
             // Handle callback URL
             if let url = navigationAction.request.URL where (url.scheme == dismissUrl.scheme && url.host == dismissUrl.host) {
