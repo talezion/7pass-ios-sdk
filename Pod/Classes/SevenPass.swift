@@ -47,7 +47,7 @@ public class SevenPass: NSObject {
     }
 
     func sevenpassClient(accessToken: String, basePath: String) -> SevenPassClient {
-        let client = SevenPassClient(consumerKey: self.configuration.consumerKey, consumerSecret: self.configuration.consumerSecret)
+        let client = SevenPassClient(consumerSecret: configuration.consumerSecret)
 
         client.baseUri = NSURL(string: "\(self.configuration.host)\(basePath)")!
         client.accessToken = accessToken

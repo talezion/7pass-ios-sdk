@@ -10,7 +10,7 @@ import OAuthSwift
 import CryptoSwift
 
 public class SevenPassClient {
-    public let consumerSecret: String
+    public let consumerSecret: String?
     public var baseUri: NSURL = NSURL()
     private let oAuthSwiftClient: OAuthSwiftClient
 
@@ -25,21 +25,21 @@ public class SevenPassClient {
 
     public typealias SuccessHandler = (json: Dictionary<String, AnyObject>, response: NSHTTPURLResponse) -> Void
 
-    public init(consumerKey: String, consumerSecret: String) {
+    public init(consumerSecret: String?) {
         self.consumerSecret = consumerSecret
         
-        self.oAuthSwiftClient = OAuthSwiftClient(consumerKey: consumerKey, consumerSecret: consumerSecret)
+        self.oAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
         self.oAuthSwiftClient.credential.version = .OAuth2
     }
 
     var appsecretProof: String? {
-        if self.consumerSecret.isEmpty {
+        if let consumerSecret = self.consumerSecret {
+            let authenticator = Authenticator.HMAC(key: Array(consumerSecret.utf8), variant: HMAC.Variant.sha256)
+
+            return self.accessToken.authenticate(authenticator)
+        } else {
             return nil
         }
-
-        let authenticator = Authenticator.HMAC(key: Array(self.consumerSecret.utf8), variant: HMAC.Variant.sha256)
-        
-        return self.accessToken.authenticate(authenticator)
     }
 
     // MARK: client methods
