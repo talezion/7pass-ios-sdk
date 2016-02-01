@@ -92,13 +92,23 @@
                                     <action selector="autologin:" destination="lzC-bg-seg" eventType="touchUpInside" id="bAA-af-LE4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6n-r7-IF2">
+                                <rect key="frame" x="243" y="139" width="114" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Fetch /me"/>
+                                <connections>
+                                    <action selector="request:" destination="lzC-bg-seg" eventType="touchUpInside" id="oD1-aB-tE3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mj9-9e-sXO" firstAttribute="centerX" secondItem="wiv-an-yYW" secondAttribute="centerX" id="1ge-9f-jyv"/>
                             <constraint firstItem="mj9-9e-sXO" firstAttribute="top" secondItem="k4d-hE-UNK" secondAttribute="bottom" constant="27" id="7NT-bt-rzX"/>
+                            <constraint firstItem="D6n-r7-IF2" firstAttribute="top" secondItem="Y9r-Rx-rWz" secondAttribute="bottom" constant="15" id="FJ8-XC-Mje"/>
                             <constraint firstItem="Y9r-Rx-rWz" firstAttribute="top" secondItem="mj9-9e-sXO" secondAttribute="bottom" constant="20" id="L0M-5n-x1D"/>
                             <constraint firstItem="Y9r-Rx-rWz" firstAttribute="centerX" secondItem="wiv-an-yYW" secondAttribute="centerX" id="hgG-0e-vdp"/>
+                            <constraint firstItem="D6n-r7-IF2" firstAttribute="centerX" secondItem="wiv-an-yYW" secondAttribute="centerX" id="qjC-TR-6Vn"/>
                         </constraints>
                     </view>
                 </viewController>

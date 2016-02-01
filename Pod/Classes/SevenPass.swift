@@ -46,25 +46,18 @@ public class SevenPass: NSObject {
         return OAuthSwift.handleOpenURL(url)
     }
 
-    func sevenpassClient(accessToken: String, basePath: String) -> SevenPassClient {
-        let client = SevenPassClient(consumerSecret: configuration.consumerSecret)
-
-        client.baseUri = NSURL(string: "\(self.configuration.host)\(basePath)")!
-        client.accessToken = accessToken
-
-        return client
+    func baseUri(basePath: String) -> NSURL {
+        return NSURL(string: "\(configuration.host)\(basePath)")!
     }
 
-    public func accountClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
-        guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
-
-        return sevenpassClient(accessToken, basePath: "/api/accounts/")
+    public func accountClient(tokenSet: SevenPassTokenSet, tokenSetUpdated: SevenPassRefreshingClient.TokenSetUpdated? = nil) -> SevenPassRefreshingClient {
+        return SevenPassRefreshingClient(sso: self, baseUri: baseUri("/api/accounts/"), tokenSet: tokenSet, consumerSecret: configuration.consumerSecret, tokenSetUpdated: tokenSetUpdated)
     }
 
     public func deviceCredentialsClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
         guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
 
-        return sevenpassClient(accessToken, basePath: "/api/client/")
+        return SevenPassClient(baseUri: baseUri("/api/client/"), accessToken: accessToken, consumerSecret: configuration.consumerSecret)
     }
 
     func initOauthSwift() {
@@ -286,3 +279,7 @@ public class SevenPass: NSObject {
         )
     }
 }
+
+// MARK: SevenPass errors
+public let SevenPassErrorDomain = "sevenpass.error"
+

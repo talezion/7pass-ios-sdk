@@ -25,11 +25,14 @@ public class SevenPassClient {
 
     public typealias SuccessHandler = (json: Dictionary<String, AnyObject>, response: NSHTTPURLResponse) -> Void
 
-    public init(consumerSecret: String?) {
+    public init(baseUri: NSURL, accessToken: String, consumerSecret: String?) {
         self.consumerSecret = consumerSecret
         
         self.oAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
         self.oAuthSwiftClient.credential.version = .OAuth2
+
+        self.baseUri = baseUri
+        self.accessToken = accessToken
     }
 
     var appsecretProof: String? {

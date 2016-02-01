@@ -32,9 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         sso.authorize(
             scopes: ["openid", "profile", "email"],
             success: { tokenSet in
-                SsoManager.sharedInstance.updateTokenSet(tokenSet)
-                self.mainView?.updateStatusbar()
-
+                self.updateTokenSet(tokenSet)
                 self.request()
             },
             failure: errorHandler
@@ -75,9 +73,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         scopes: ["openid", "profile", "email"],
                         params: ["response_type": "id_token+token"],
                         success: { tokenSet in
-                            SsoManager.sharedInstance.updateTokenSet(tokenSet)
-                            self.mainView?.updateStatusbar()
-
+                            self.updateTokenSet(tokenSet)
                             self.request()
                         },
                         failure: errorHandler
@@ -88,20 +84,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         )
     }
-    
-    func request() {
-        let client = self.sso.accountClient(SsoManager.sharedInstance.tokenSet!)
 
-        client.get("me",
-            success: { json, response in
-                let accessTokenString = SsoManager.sharedInstance.tokenSet?.accessToken?.token
+    @IBAction func request(sender: AnyObject? = nil) {
+        if let accountClient = SsoManager.sharedInstance.accountClient {
+            accountClient.get("me",
+                success: { json, response in
+                    let accessTokenString = SsoManager.sharedInstance.tokenSet?.accessToken?.token
 
-                showAlert(title: "GET /api/accounts/me", message: "Access Token: \(accessTokenString)\n\n\(json.description)")
-            },
-            failure: { error in
-                errorHandler(error)
-            }
-        )
+                    showAlert(title: "GET /api/accounts/me", message: "Access Token: \(accessTokenString)\n\n\(json.description)")
+                },
+                failure: { error in
+                    errorHandler(error)
+                }
+            )
+        } else {
+            showAlert(title: "AccountClient missing", message: "Not logged in")
+        }
+    }
+
+    func updateTokenSet(tokenSet: SevenPassTokenSet) {
+        print("TokenSet updated")
+
+        SsoManager.sharedInstance.updateTokenSet(tokenSet)
+        mainView?.updateStatusbar()
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

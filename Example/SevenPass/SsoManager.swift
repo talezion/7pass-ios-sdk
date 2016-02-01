@@ -14,6 +14,7 @@ class SsoManager {
     let sso: SevenPass
     var tokenSetCache: SevenPassTokenSetCache!
     var tokenSet: SevenPassTokenSet?
+    var accountClient: SevenPassRefreshingClient?
 
     init() {
         let configuration = SevenPassConfiguration(
@@ -27,6 +28,8 @@ class SsoManager {
 
         tokenSetCache = SevenPassTokenSetCache(configuration: sso.configuration)
         tokenSet = tokenSetCache.load()
+
+        setAccountClient()
     }
 
     func updateTokenSet(tokenSet: SevenPassTokenSet?) {
@@ -37,6 +40,14 @@ class SsoManager {
             tokenSetCache.delete()
         } else {
             tokenSetCache.save()
+        }
+
+        setAccountClient()
+    }
+
+    func setAccountClient() {
+        if let tokenSet = tokenSet {
+            accountClient = sso.accountClient(tokenSet, tokenSetUpdated: updateTokenSet)
         }
     }
 }
