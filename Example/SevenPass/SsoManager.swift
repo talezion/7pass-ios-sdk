@@ -33,6 +33,8 @@ class SsoManager {
     }
 
     func updateTokenSet(tokenSet: SevenPassTokenSet?) {
+        print("TokenSet updated")
+
         self.tokenSet = tokenSet
         tokenSetCache.tokenSet = tokenSet
 
@@ -41,8 +43,6 @@ class SsoManager {
         } else {
             tokenSetCache.save()
         }
-
-        setAccountClient()
     }
 
     func setAccountClient() {

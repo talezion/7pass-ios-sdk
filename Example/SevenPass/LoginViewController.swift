@@ -103,9 +103,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     func updateTokenSet(tokenSet: SevenPassTokenSet) {
-        print("TokenSet updated")
-
         SsoManager.sharedInstance.updateTokenSet(tokenSet)
+        SsoManager.sharedInstance.setAccountClient()
         mainView?.updateStatusbar()
     }
 
