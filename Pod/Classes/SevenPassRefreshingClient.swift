@@ -67,21 +67,19 @@ public class SevenPassRefreshingClient: SevenPassClient {
                     failure?(error: error)
                 }
             )
-        } else {
-            if let failure = failure {
-                let error = NSError(domain:SevenPassErrorDomain, code:0, userInfo:[NSLocalizedDescriptionKey: "Refresh token is expired"])
+        } else if let failure = failure {
+            let error = NSError(domain:SevenPassErrorDomain, code:0, userInfo:[NSLocalizedDescriptionKey: "Refresh token is expired"])
 
-                failure(error: error)
-            }
+            failure(error: error)
         }
     }
 
     func ensureFreshTokenSet(success success: () -> Void, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
-        if tokenSet.accessToken?.isExpired() == true {
-            refreshTokenSet(tokenSet, success: success, failure: failure)
-        } else {
+        if tokenSet.accessToken?.isExpired() == false {
             // AccessToken is fresh
             success()
+        } else {
+            refreshTokenSet(tokenSet, success: success, failure: failure)
         }
     }
 }
