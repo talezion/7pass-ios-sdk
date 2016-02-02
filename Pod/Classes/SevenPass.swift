@@ -112,7 +112,7 @@ public class SevenPass: NSObject {
 
     public func authorize(var parameters parameters: Dictionary<String, String>, success: SevenPassTokenSet -> Void, failure: SevenPassConfiguration.FailureHandler) {
         configuration.fetch(
-            success: {
+            success: { [unowned self] in
                 self.initOauthSwift()
 
                 let config = self.configuration.config
@@ -157,7 +157,7 @@ public class SevenPass: NSObject {
 
     public func authorize(scopes scopes: Array<String>, var params: [String: String] = [String: String](), success: (tokenSet: SevenPassTokenSet) -> Void, failure: SevenPassConfiguration.FailureHandler) {
         configuration.fetch(
-            success: {
+            success: { [unowned self] in
                 self.initOauthSwift()
 
                 params["nonce"] = OAuthSwiftCredential.generateNonce()
