@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "SevenPass"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of SevenPass."
+  s.version          = "1.0.0"
+  s.summary          = "7Pass iOS SDK is a Swift library for interacting with the 7Pass SSO service."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -20,11 +20,11 @@ Pod::Spec.new do |s|
     Client for SevenPass SSO
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/SevenPass"
+  s.homepage         = "https://github.com/p7s1-ctf/7pass-ios-sdk"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "Jan Votava" => "votava@deployment.cz" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/SevenPass.git", :tag => s.version.to_s }
+  s.author           = { "Jan Votava" => "jan@sensible.io" }
+  s.source           = { :git => "https://github.com/p7s1-ctf/7pass-ios-sdk.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
