@@ -14,12 +14,13 @@ public let OAuthJWTErrorDomain = "OAuthJWTErrorDomain"
 
 public class SevenPass: NSObject {
     public let configuration: SevenPassConfiguration
-    var oauthswift: OAuth2Swift!
-    public var urlHandler: SevenPassURLHandlerType!
+    public let urlHandler: SevenPassURLHandlerType
 
-    public init(configuration: SevenPassConfiguration) {
+    var oauthswift: OAuth2Swift!
+
+    public init(configuration: SevenPassConfiguration, urlHandler: SevenPassWebViewController? = nil) {
         self.configuration = configuration
-        self.urlHandler = SevenPassWebViewController(urlString: configuration.callbackUri)
+        self.urlHandler = urlHandler ?? SevenPassWebViewController(urlString: configuration.callbackUri)
     }
 
     private func loadJwt(jwt: String, consumerKey: String? = nil) throws -> JWT {
