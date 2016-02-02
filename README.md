@@ -212,6 +212,69 @@ sso.authorize(
 )
 ```
 
+### 4. Autologin
+
+In case, that you already have valid `TokenSet` (fe. from password or social login) or a valid `autologin_token` and you want to create user session in the WebView, you can utilize `autologin` method.
+
+By default this method sets `response_type = "none"`
+
+
+### Handling interaction_required error
+
+It's important to note that if the user hasn't accepted all of the necessary consents for the client or the service the client belongs to, the login through Username & Password or Social method might fail and it's necessary to handle this situation in your error handling callback.
+
+```swift
+func errorHandler(error: NSError) {
+    // Let autologin handle interaction_required errors
+    if let errorMessage = error.userInfo["error"] as? String where errorMessage == "interaction_required" {
+        let autologinToken = error.userInfo["autologin_token"] as! String
+
+        self.sso.autologin(
+            autologinToken: autologinToken,
+            scopes: ["openid", "profile", "email"],
+            params: ["response_type": "id_token+token"],
+            success: { tokenSet in
+                // Do some stuff
+            },
+            failure: errorHandler
+        )
+    }
+
+    // Handle other errors
+}
+```
+
+##### Login using valid tokenSet
+
+TokenSet has to include valid `access_token` and `id_token`
+
+```swift
+sso.autologin(tokenSet,
+    scopes: ["openid", "profile", "email"],
+    rememberMe: false,
+    success: { tokenSet in
+        // Do some stuff
+    },
+    failure: errorHandler
+)
+```
+
+##### Login using autologin token
+
+Used for example when `interaction_required` error is returned from the server.
+
+```swift
+sso.autologin(
+    autologinToken: "AUTOLOGINTOKEN",
+    scopes: ["openid", "profile", "email"],
+    params: ["response_type": "id_token+token"],
+    success: { tokenSet in
+        // Do some stuff
+    },
+    failure: errorHandler
+)
+```
+
 ## Account client
 
 Now that you have an account's `TokenSet`, you can already identify the user and
