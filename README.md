@@ -434,6 +434,16 @@ deviceClient.post("registration",
 )
 ```
 
+## Advanced usage
+
+### Customize WebView
+
+Create your own custom class implemeting `SevenPassURLHandlerType` protocol and pass that instance to `SevenPass` init.
+
+```swift
+let sso = SevenPass(configuration: configuration, urlHandler: YourWebViewController())
+```
+
 ## License
 
 SevenPass is available under the MIT license. See the LICENSE file for more info.
