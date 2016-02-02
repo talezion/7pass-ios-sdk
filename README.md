@@ -309,6 +309,10 @@ generally depends on your app's requirements.
 tokenSet.idTokenDecoded
 ```
 
+### Refreshing accountClient TokenSet
+
+Account client is an instance of `SevenPassRefreshingClient` which handles refreshing of the tokens for you seamlessly.
+
 ## Credentials client
 
 A credentials client can be used to perform various administrative tasks not
