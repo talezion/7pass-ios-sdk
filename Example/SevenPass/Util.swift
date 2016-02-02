@@ -14,13 +14,12 @@ func showAlert(title title: String, message: String) {
         let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(defaultAction)
 
-        // Delay alert by 0.4s, so it doesn't collide with a WebView presentation
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, 400000000)
+        // Delay alert by 0.5s, so it doesn't collide with a WebView presentation
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, 500000000)
 
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
             topController.presentViewController(alertController, animated: true, completion: nil)
         })
-
     }
 }
 
