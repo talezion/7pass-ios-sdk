@@ -218,6 +218,17 @@ In case, that you already have valid `TokenSet` (fe. from password or social log
 
 By default this method sets `response_type = "none"`
 
+### 5. Logging out
+
+In the app's perspective, a user is logged in when you have a fresh
+`TokenSet`. In order to log the user out, all that's required is to
+"forget" the tokens. Optionally, you can destroy the user's session in WebView as well.
+
+To use it, just call
+
+```swift
+sso.destroyWebviewSession(failure: errorHandler)
+```
 
 ### Handling interaction_required error
 
