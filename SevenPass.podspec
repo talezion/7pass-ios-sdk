@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = "SevenPass"
   s.version          = "0.0.1"
-  s.summary          = "7Pass iOS SDK is a Swift library for interacting with the 7Pass SSO service."
+  s.summary          = "Client for SevenPass SSO"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description      = <<-DESC
-    Client for SevenPass SSO
+    7Pass iOS SDK is a Swift library for interacting with the 7Pass SSO service.
                        DESC
 
   s.homepage         = "https://github.com/p7s1-ctf/7pass-ios-sdk"
