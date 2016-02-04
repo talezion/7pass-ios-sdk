@@ -6,32 +6,24 @@ PODS:
   - JWTDecode (1.0.0)
   - Locksmith (2.0.6)
   - Nimble (3.0.0)
-  - OAuthSwift (0.5.0)
+  - OAuthSwift@p7s1 (0.5.0p1)
   - Quick (0.8.0)
-  - SevenPass (0.1.0):
+  - SevenPass (1.0.0):
     - AwesomeCache (~> 2.0)
     - CryptoSwift
     - JSONWebToken
     - JWTDecode (~> 1.0)
     - Locksmith
+    - OAuthSwift@p7s1 (~> 0.5.0p1)
 
 DEPENDENCIES:
   - Nimble (= 3.0.0)
-  - OAuthSwift (from `https://github.com/p7s1-ctf/OAuthSwift.git`, branch `p7-changes`)
   - Quick (~> 0.8.0)
   - SevenPass (from `../`)
 
 EXTERNAL SOURCES:
-  OAuthSwift:
-    :branch: p7-changes
-    :git: https://github.com/p7s1-ctf/OAuthSwift.git
   SevenPass:
     :path: "../"
-
-CHECKOUT OPTIONS:
-  OAuthSwift:
-    :commit: 1de43966d0338bf7a6c779dfcbb41aadbf3a639a
-    :git: https://github.com/p7s1-ctf/OAuthSwift.git
 
 SPEC CHECKSUMS:
   AwesomeCache: 5d6839ad139cdcee3c3a067f6fc1849523867dd9
@@ -40,10 +32,10 @@ SPEC CHECKSUMS:
   JWTDecode: d172edcb1607cc15aed85d58eceedcbb675a4534
   Locksmith: 42ec3d535448e3c218f4342782b07a222b1acfd1
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  OAuthSwift: f2e0de083739da5697be095c9af2671242a4ed8b
+  OAuthSwift@p7s1: 59cfde9ad2e41f66685474553728706cb6af3a1c
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SevenPass: 6ce19739270a0958af7dfaeb1daabec9f808c4a7
+  SevenPass: f6b48dc484dc0b25a5dc0cf5414a4c82628e2794
 
-PODFILE CHECKSUM: 729c7cc84016ef8108f858ba7b8bc3b49c288d0f
+PODFILE CHECKSUM: 176094f03c5b102caaca60786f98883db0e9fb8e
 
 COCOAPODS: 1.0.0.beta.2

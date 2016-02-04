@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 
-  # s.dependency 'OAuthSwift', '~> 0.5.0'
+  s.dependency 'OAuthSwift@p7s1', '~> 0.5.0p1'
   s.dependency 'CryptoSwift'
   s.dependency 'Locksmith'
   s.dependency 'JWTDecode', '~> 1.0'
