@@ -8,7 +8,7 @@ PODS:
   - Nimble (3.0.0)
   - OAuthSwift@p7s1 (0.5.0p1)
   - Quick (0.8.0)
-  - SevenPass (1.0.0):
+  - SevenPass (0.0.1):
     - AwesomeCache (~> 2.0)
     - CryptoSwift
     - JSONWebToken
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   OAuthSwift@p7s1: 59cfde9ad2e41f66685474553728706cb6af3a1c
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SevenPass: f6b48dc484dc0b25a5dc0cf5414a4c82628e2794
+  SevenPass: ae127595809d7d71ef929d31410ecab44afb5b92
 
 PODFILE CHECKSUM: 176094f03c5b102caaca60786f98883db0e9fb8e
 

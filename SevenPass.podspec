@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SevenPass"
-  s.version          = "1.0.0"
+  s.version          = "0.0.1"
   s.summary          = "7Pass iOS SDK is a Swift library for interacting with the 7Pass SSO service."
 
 # This description is used to generate tags and improve search results.
