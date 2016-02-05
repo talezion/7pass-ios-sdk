@@ -1,4 +1,4 @@
-import OAuthSwift
+import OAuthSwift_p7s1
 import WebKit
 
 typealias WebView = WKWebView
