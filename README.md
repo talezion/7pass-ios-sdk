@@ -15,7 +15,14 @@ SevenPass is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'SevenPass', :git => 'https://github.com/p7s1-ctf/7pass-ios-sdk.git'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/p7s1-ctf/cocoapods-specs.git'
+
+use_frameworks!
+
+target 'MyApp' do
+  pod 'SevenPass'
+end
 ```
 
 ## Running the sample application
