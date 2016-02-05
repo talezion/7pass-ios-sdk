@@ -331,6 +331,19 @@ tokenSet.idTokenDecoded
 
 Account client is an instance of `SevenPassRefreshingClient` which handles refreshing of the tokens for you seamlessly.
 
+Optionally callback can be supplied as an argument to `accountClient` method:
+
+```swift
+let accountClient = sso.accountClient(
+  tokenSet,
+  tokenSetUpdated: { tokenSet in
+    // Save new tokens
+    tokenSetCache.tokenSet = tokenSet
+    tokenSetCache.save()
+  }
+)
+```
+
 ## Credentials client
 
 A credentials client can be used to perform various administrative tasks not
