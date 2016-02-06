@@ -27,7 +27,7 @@ class RegistrationViewController: UIViewController {
                 "grant_type": "client_credentials",
             ],
             success: { tokenSet in
-                self.client = self.sso.deviceCredentialsClient(tokenSet)
+                self.client = self.sso.credentialsClient(tokenSet)
             },
             failure: errorHandler
         )

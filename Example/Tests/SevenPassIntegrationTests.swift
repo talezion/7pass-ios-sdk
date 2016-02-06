@@ -219,7 +219,7 @@ class SevenPassIntegration: XCTestCase {
                 "grant_type": "client_credentials",
             ],
             success: { tokenSet in
-                completion(self.sevenPass.deviceCredentialsClient(tokenSet))
+                completion(self.sevenPass.credentialsClient(tokenSet))
             },
             failure: { error in
                 XCTFail(error.localizedDescription)

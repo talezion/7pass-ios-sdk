@@ -55,7 +55,7 @@ public class SevenPass: NSObject {
         return SevenPassRefreshingClient(sso: self, baseUri: baseUri("/api/accounts/"), tokenSet: tokenSet, consumerSecret: configuration.consumerSecret, tokenSetUpdated: tokenSetUpdated)
     }
 
-    public func deviceCredentialsClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
+    public func credentialsClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
         guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
 
         return SevenPassClient(baseUri: baseUri("/api/client/"), accessToken: accessToken, consumerSecret: configuration.consumerSecret)

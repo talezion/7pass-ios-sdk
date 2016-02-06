@@ -374,7 +374,7 @@ Once you have the token set available, you can get the Credentials client and
 invoke the available methods.
 
 ```swift
-let deviceClient = sso.deviceCredentialsClient(tokenSet)
+let credentialsClient = sso.credentialsClient(tokenSet)
 ```
 
 ### Checking an email's availability
