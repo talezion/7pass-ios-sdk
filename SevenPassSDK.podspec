@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "SevenPass"
+  s.name             = "SevenPassSDK"
   s.version          = "1.0.0"
-  s.summary          = "Client for SevenPass SSO"
+  s.summary          = "7Pass SDK to access 7Pass SSO features"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?

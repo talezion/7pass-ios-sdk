@@ -2,7 +2,7 @@
 
 import Quick
 import Nimble
-import SevenPass
+import SevenPassSDK
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
@@ -19,7 +19,7 @@ class TableOfContentsSpec: QuickSpec {
             it("will eventually fail") {
                 expect("time").toEventually( equal("done") )
             }
-            
+
             context("these will pass") {
 
                 it("can do maths") {

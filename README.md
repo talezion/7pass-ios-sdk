@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-SevenPass is available through [CocoaPods](http://cocoapods.org). To install
+SevenPassSDK is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -21,7 +21,7 @@ source 'https://github.com/p7s1-ctf/cocoapods-specs.git'
 use_frameworks!
 
 target 'MyApp' do
-  pod 'SevenPass'
+  pod 'SevenPassSDK'
 end
 ```
 
@@ -30,7 +30,7 @@ end
 To demonstrate the functionality of the library, there's a sample
 application available. The application is configured to run against
 the QA instance of 7Pass and uses test credentials
-(Example/SevenPass/SsoManager.swift). Feel free to use these credentials
+(Example/SevenPassSDK/SsoManager.swift). Feel free to use these credentials
 while testing but you need to obtain real credentials before releasing
 your app.
 
@@ -43,8 +43,8 @@ Once you have the credentials available, you can go ahead and type
 pod install
 ```
 
-in `Example` directory, open `SevenPass.xcworkspace` project in XCode,
-select `SevenPass-Example` build configuration and run it.
+in `Example` directory, open `SevenPassSDK.xcworkspace` project in XCode,
+select `SevenPassSDK-Example` build configuration and run it.
 
 The sample application should now start within the configured device
 (or the emulator) and should provide several tabs each implementing a
@@ -466,4 +466,4 @@ let sso = SevenPass(configuration: configuration, urlHandler: YourWebViewControl
 
 ## License
 
-SevenPass is available under the MIT license. See the LICENSE file for more info.
+SevenPassSDK is available under the MIT license. See the LICENSE file for more info.

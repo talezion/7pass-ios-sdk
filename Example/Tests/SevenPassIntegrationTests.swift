@@ -1,8 +1,8 @@
 import XCTest
-import SevenPass
+import SevenPassSDK
 
 class SevenPassIntegration: XCTestCase {
-    
+
     // Use same instance of SevenPass for all integration tests (should reflect real-world usage).
     private lazy var sevenPass: SevenPass = {
         let configuration = SevenPassConfiguration(
@@ -11,26 +11,26 @@ class SevenPassIntegration: XCTestCase {
             callbackUri: "oauthtest://oauth-callback",
             environment: "qa"
         )
-        
+
         return SevenPass(configuration: configuration)
     }()
-    
+
     private let testUsername = "prosiebendigital+7@gmail.com"
     private let testPassword = "Kunf_tiger7"
-    
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     // MARK: - Tokens
-    
+
     func testPasswordLogin() {
         let expectation = expectationWithDescription("Password Login")
-        
+
         sevenPass.authorize(
             login: testUsername,
             password: testPassword,
@@ -46,19 +46,19 @@ class SevenPassIntegration: XCTestCase {
                 expectation.fulfill()
             }
         )
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     func testRefreshToken() {
         let expectation = expectationWithDescription("Refresh Token")
-        
+
         authorize { authTokenSet in
             guard let refreshToken = authTokenSet.refreshToken?.token else {
                 XCTFail("Refresh token not set")
                 return
             }
-            
+
             self.sevenPass.authorize(refreshToken: refreshToken,
                 success: { tokenSet in
                     XCTAssertNotNil(tokenSet.accessToken?.token)
@@ -71,18 +71,18 @@ class SevenPassIntegration: XCTestCase {
                 }
             )
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     // MARK: - Account
-    
+
     func testAccountDetails() {
         let expectation = expectationWithDescription("Get Account Details")
-        
+
         authorize { authTokenSet in
             let accountClient = self.sevenPass.accountClient(authTokenSet)
-            
+
             accountClient.get("me",
                 success: { json, response in
                     guard let
@@ -93,7 +93,7 @@ class SevenPassIntegration: XCTestCase {
                             XCTFail("JSON response invalid.")
                             return
                     }
-                    
+
                     XCTAssertEqual(status, "success")
                     XCTAssertEqual(email, self.testUsername)
                     expectation.fulfill()
@@ -104,65 +104,65 @@ class SevenPassIntegration: XCTestCase {
                 }
             )
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     // MARK: - Email
-    
+
     func testEmailIsTaken() {
         let expectation = expectationWithDescription("Email is taken")
-        
+
         fetchEmailAvailability(testUsername) { isAvailable in
             XCTAssertFalse(isAvailable)
             expectation.fulfill()
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     func testEmailIsAvailable() {
         let expectation = expectationWithDescription("Email is available")
-        
+
         fetchEmailAvailability("prosiebendigital+42@gmail.com") { isAvailable in
             XCTAssertTrue(isAvailable)
             expectation.fulfill()
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     // MARK: - Passwords
-    
+
     func testPasswordIsValid() {
         let expectation = expectationWithDescription("Password is valid")
-        
+
         fetchPasswordValidity("kunftiger7") { isValid in
             XCTAssertTrue(isValid)
             expectation.fulfill()
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     func testPasswordIsInvalid() {
         let expectation = expectationWithDescription("Password is invalid")
-        
+
         fetchPasswordValidity("12345") { isValid in
             XCTAssertFalse(isValid)
             expectation.fulfill()
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     // MARK: - Registration
-    
+
     func testRegistration() {
         let expectation = expectationWithDescription("Register new user")
-        
+
         let randAccountSuffix = 2000 + arc4random_uniform(UInt32.max)
-        
+
         fetchCredentials { deviceClient in
             deviceClient.post("registration",
                 parameters: [
@@ -193,12 +193,12 @@ class SevenPassIntegration: XCTestCase {
                 }
             )
         }
-        
+
         waitForExpectationsWithTimeout(10) { _ in }
     }
-    
+
     // MARK: - Helper methods
-    
+
     private func authorize(completion: SevenPassTokenSet -> Void) {
         sevenPass.authorize(
             login: testUsername,
@@ -212,7 +212,7 @@ class SevenPassIntegration: XCTestCase {
             }
         )
     }
-    
+
     private func fetchCredentials(completion: SevenPassClient -> Void) {
         sevenPass.authorize(
             parameters: [
@@ -226,7 +226,7 @@ class SevenPassIntegration: XCTestCase {
             }
         )
     }
-    
+
     private func fetchEmailAvailability(email: String, completion: Bool -> Void) {
         fetchCredentials { deviceClient in
             deviceClient.post("checkMail",
@@ -251,7 +251,7 @@ class SevenPassIntegration: XCTestCase {
             )
         }
     }
-    
+
     private func fetchPasswordValidity(password: String, completion: Bool -> Void) {
         fetchCredentials { deviceClient in
             deviceClient.post("checkPassword",
@@ -273,5 +273,5 @@ class SevenPassIntegration: XCTestCase {
             )
         }
     }
-    
+
 }

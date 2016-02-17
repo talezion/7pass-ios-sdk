@@ -2,12 +2,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/p7s1-ctf/cocoapods-specs.git'
 use_frameworks!
 
-target 'SevenPass_Example' do
-  pod "SevenPass", :path => "../"
+target 'SevenPassSDK_Example' do
+  pod "SevenPassSDK", :path => "../"
 end
 
-target 'SevenPass_Tests' do
-  pod "SevenPass", :path => "../"
+target 'SevenPassSDK_Tests' do
+  pod "SevenPassSDK", :path => "../"
 
   pod 'Quick', '~> 0.8.0'
   pod 'Nimble', '3.0.0'

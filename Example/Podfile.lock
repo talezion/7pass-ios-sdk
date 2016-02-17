@@ -4,11 +4,11 @@ PODS:
   - JSONWebToken (1.4.1):
     - CryptoSwift (= 0.0.14)
   - JWTDecode (1.0.0)
-  - Locksmith (2.0.6)
+  - Locksmith (2.0.8)
   - Nimble (3.0.0)
   - OAuthSwift@p7s1 (0.5.0p1)
   - Quick (0.8.0)
-  - SevenPass (0.0.1):
+  - SevenPassSDK (1.0.0):
     - AwesomeCache (~> 2.0)
     - CryptoSwift
     - JSONWebToken
@@ -19,10 +19,10 @@ PODS:
 DEPENDENCIES:
   - Nimble (= 3.0.0)
   - Quick (~> 0.8.0)
-  - SevenPass (from `../`)
+  - SevenPassSDK (from `../`)
 
 EXTERNAL SOURCES:
-  SevenPass:
+  SevenPassSDK:
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -30,12 +30,12 @@ SPEC CHECKSUMS:
   CryptoSwift: 5a6b725e2ad65a789f5f435dd434d38eb2c40b46
   JSONWebToken: cf8b58850dc4cf38ce777a08753a2ea1620d960e
   JWTDecode: d172edcb1607cc15aed85d58eceedcbb675a4534
-  Locksmith: 42ec3d535448e3c218f4342782b07a222b1acfd1
+  Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   OAuthSwift@p7s1: 59cfde9ad2e41f66685474553728706cb6af3a1c
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SevenPass: ae127595809d7d71ef929d31410ecab44afb5b92
+  SevenPassSDK: b1ebd2d77a4a420635c002f64aab3cbbfb9dfbb1
 
-PODFILE CHECKSUM: 176094f03c5b102caaca60786f98883db0e9fb8e
+PODFILE CHECKSUM: 3947695f5a46d477f6f78a1462d324487f233843
 
 COCOAPODS: 1.0.0.beta.2

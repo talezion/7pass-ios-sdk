@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SevenPass
+import SevenPassSDK
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var login: UITextField!

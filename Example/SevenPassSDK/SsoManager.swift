@@ -6,7 +6,7 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
-import SevenPass
+import SevenPassSDK
 
 class SsoManager {
     static let sharedInstance = SsoManager()

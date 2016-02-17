@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SevenPass
+import SevenPassSDK
 
 class RegistrationViewController: UIViewController {
     @IBOutlet weak var login: UITextField!
@@ -21,7 +21,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         sso.authorize(
             parameters: [
                 "grant_type": "client_credentials",
