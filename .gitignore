@@ -22,5 +22,10 @@ DerivedData
 # Bundler
 .bundle
 
-Carthage
+!/Carthage
+/Carthage/*
+!/Carthage/Build
+/Carthage/Build/*
+!/Carthage/Build/iOS
+
 Pods/

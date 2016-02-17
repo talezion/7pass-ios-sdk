@@ -464,6 +464,17 @@ Create your own custom class implemeting `SevenPassURLHandlerType` protocol and 
 let sso = SevenPass(configuration: configuration, urlHandler: YourWebViewController())
 ```
 
+## Developers
+
+### OAuthSwift custom fork
+
+This library comes bundled with custom fork of OAuthSwift library, that can be downloaded and builded using
+[Carthage](https://github.com/Carthage/Carthage), to rebuild it, run:
+
+```swift
+carthage update --platform iOS
+```
+
 ## License
 
 SevenPassSDK is available under the MIT license. See the LICENSE file for more info.

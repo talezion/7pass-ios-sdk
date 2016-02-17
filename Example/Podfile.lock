@@ -6,7 +6,6 @@ PODS:
   - JWTDecode (1.0.0)
   - Locksmith (2.0.8)
   - Nimble (3.0.0)
-  - OAuthSwift@p7s1 (0.5.0p1)
   - Quick (0.8.0)
   - SevenPassSDK (1.0.0):
     - AwesomeCache (~> 2.0)
@@ -14,7 +13,6 @@ PODS:
     - JSONWebToken
     - JWTDecode (~> 1.0)
     - Locksmith
-    - OAuthSwift@p7s1 (~> 0.5.0p1)
 
 DEPENDENCIES:
   - Nimble (= 3.0.0)
@@ -32,9 +30,8 @@ SPEC CHECKSUMS:
   JWTDecode: d172edcb1607cc15aed85d58eceedcbb675a4534
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  OAuthSwift@p7s1: 59cfde9ad2e41f66685474553728706cb6af3a1c
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SevenPassSDK: b1ebd2d77a4a420635c002f64aab3cbbfb9dfbb1
+  SevenPassSDK: fb2b0fa6f063f75df05044b9e8a2320268c9a49b
 
 PODFILE CHECKSUM: 3947695f5a46d477f6f78a1462d324487f233843
 
