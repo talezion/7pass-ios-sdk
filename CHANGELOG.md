@@ -2,6 +2,9 @@
 
 The 7Pass iOS SDK follows [SemVer](http://semver.org/).
 
+- 1.0.2 (2016-02-23)
+  - Fix OAuthSwift import paths
+
 - 1.0.1 (2016-02-17)
   - Bundle custom OAuthSwift.framework
 
