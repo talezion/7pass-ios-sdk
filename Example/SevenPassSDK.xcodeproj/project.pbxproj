@@ -18,7 +18,6 @@
 		DBE9D9A91C746230003C39C3 /* SsoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9D9A11C746230003C39C3 /* SsoManager.swift */; };
 		DBE9D9AA1C746230003C39C3 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9D9A21C746230003C39C3 /* Util.swift */; };
 		DBE9D9AB1C746230003C39C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9D9A31C746230003C39C3 /* ViewController.swift */; };
-		DBE9D9AD1C746281003C39C3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBE9D9AC1C746281003C39C3 /* Info.plist */; };
 		DBE9D9AF1C74629F003C39C3 /* SevenPassSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DBE9D9AE1C74629F003C39C3 /* SevenPassSDK.podspec */; };
 		DBE9D9B41C7462F8003C39C3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBE9D9B01C7462F8003C39C3 /* LaunchScreen.xib */; };
 		DBE9D9B51C7462F8003C39C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBE9D9B21C7462F8003C39C3 /* Main.storyboard */; };
@@ -268,7 +267,6 @@
 				DBE9D9B51C7462F8003C39C3 /* Main.storyboard in Resources */,
 				DBE9D9AF1C74629F003C39C3 /* SevenPassSDK.podspec in Resources */,
 				DBE9D9A51C746230003C39C3 /* Images.xcassets in Resources */,
-				DBE9D9AD1C746281003C39C3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
