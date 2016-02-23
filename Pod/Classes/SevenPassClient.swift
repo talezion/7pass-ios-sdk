@@ -6,7 +6,7 @@
 //  Copyright © 2015 Jan Votava. All rights reserved.
 //
 
-import OAuthSwift_p7s1
+import OAuthSwift
 import CryptoSwift
 
 public class SevenPassClient {

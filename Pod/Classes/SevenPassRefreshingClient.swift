@@ -6,7 +6,7 @@
 //
 //
 
-import OAuthSwift_p7s1
+import OAuthSwift
 
 public class SevenPassRefreshingClient: SevenPassClient {
     // MARK: Properties

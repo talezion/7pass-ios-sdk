@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import OAuthSwift_p7s1
+import OAuthSwift
 import AwesomeCache
 
 public class SevenPassConfiguration {
