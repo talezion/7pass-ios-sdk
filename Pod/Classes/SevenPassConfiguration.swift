@@ -23,7 +23,7 @@ public class SevenPassConfiguration {
     let hosts: [String: String] = [
         "production": "https://sso.7pass.de",
         "qa": "https://sso.qa.7pass.ctf.prosiebensat1.com",
-        "development": "https://7pass.192.168.0.101.xip.io"
+        "development": "https://7pass.dev"
     ]
     
     public init(consumerKey: String, consumerSecret: String = "", callbackUri: String, environment: String = "production") {
