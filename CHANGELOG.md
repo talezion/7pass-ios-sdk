@@ -2,6 +2,10 @@
 
 The 7Pass iOS SDK follows [SemVer](http://semver.org/).
 
+- 1.0.3 (2016-02-24)
+  - Remove WebView cookies recursively for each of the parent domains
+  - Change `development` env host to `https://7pass.dev`
+
 - 1.0.2 (2016-02-23)
   - Fix OAuthSwift import paths
 
