@@ -71,7 +71,7 @@ public class SevenPassWebViewController: OAuthWebViewController, SevenPassURLHan
 
     public func destroySession(logoutUrl: NSURL) {
         // Remove all 7pass.sess* cookies on a correct domain
-        webView.loadHTMLString("<script type=\"text/javascript\">document.cookie.match(/7pass\\.sess[a-za-z0-9.]*/gi).forEach(function(cookieName) { document.cookie = cookieName + '=; path=/; domain=' + document.domain + '; expires=' + new Date(0).toUTCString(); })</script>", baseURL: logoutUrl)
+        webView.loadHTMLString("<script type=\"text/javascript\">document.cookie.match(/7pass\\.sess[a-za-z0-9.]*/gi).forEach(function(cookieName) { var d = window.location.hostname.split('.'); while (d.length > 1) { document.cookie = cookieName + '=; path=/; domain=' + d.join('.') + '; expires=' + new Date(0).toUTCString(); d.shift(); } })</script>", baseURL: logoutUrl)
     }
 
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
