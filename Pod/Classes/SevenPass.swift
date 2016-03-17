@@ -147,6 +147,7 @@ public class SevenPass: NSObject {
                 self.oauthswift.client.request(config["token_endpoint"] as! String,
                     method: .POST,
                     parameters: parameters,
+                    headers: ["X-Service-Id": self.configuration.consumerKey],
                     success: successHandler,
                     failure: failure
                 )
