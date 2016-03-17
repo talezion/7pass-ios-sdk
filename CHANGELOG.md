@@ -2,6 +2,9 @@
 
 The 7Pass iOS SDK follows [SemVer](http://semver.org/).
 
+- 1.1.0 (2016-03-17)
+  - Sends consumerKey as X-Service-Id header value
+
 - 1.0.3 (2016-02-24)
   - Remove WebView cookies recursively for each of the parent domains
   - Change `development` env host to `https://7pass.dev`

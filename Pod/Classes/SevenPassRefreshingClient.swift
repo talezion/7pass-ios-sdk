@@ -18,14 +18,14 @@ public class SevenPassRefreshingClient: SevenPassClient {
     public typealias TokenSetUpdated = (tokenSet: SevenPassTokenSet) -> Void
 
     // MARK: init
-    init(sso: SevenPass, baseUri: NSURL, tokenSet: SevenPassTokenSet, consumerSecret: String?, tokenSetUpdated: TokenSetUpdated? = nil) {
+    init(sso: SevenPass, baseUri: NSURL, tokenSet: SevenPassTokenSet, consumerKey: String, consumerSecret: String?, tokenSetUpdated: TokenSetUpdated? = nil) {
         guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
 
         self.sso = sso
         self.tokenSet = tokenSet
         self.tokenSetUpdatedCallback = tokenSetUpdated
 
-        super.init(baseUri: baseUri, accessToken: accessToken, consumerSecret: consumerSecret)
+        super.init(baseUri: baseUri, accessToken: accessToken, consumerKey: consumerKey, consumerSecret: consumerSecret)
     }
 
     // MARK: methods

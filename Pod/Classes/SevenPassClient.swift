@@ -10,6 +10,7 @@ import OAuthSwift
 import CryptoSwift
 
 public class SevenPassClient {
+    public let consumerKey: String
     public let consumerSecret: String?
     public var baseUri: NSURL = NSURL()
     private let oAuthSwiftClient: OAuthSwiftClient
@@ -25,7 +26,8 @@ public class SevenPassClient {
 
     public typealias SuccessHandler = (json: Dictionary<String, AnyObject>, response: NSHTTPURLResponse) -> Void
 
-    public init(baseUri: NSURL, accessToken: String, consumerSecret: String?) {
+    public init(baseUri: NSURL, accessToken: String, consumerKey: String, consumerSecret: String?) {
+        self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
         
         self.oAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
@@ -70,6 +72,8 @@ public class SevenPassClient {
         // Prepend base uri
         url = NSURL(string: url, relativeToURL: self.baseUri)!.absoluteString
         parameters["appsecret_proof"] = appsecretProof
+
+        headers["X-Service-Id"] = self.consumerKey
 
         if headers["Content-Type"] == nil {
           headers["Content-Type"] = "application/json"
