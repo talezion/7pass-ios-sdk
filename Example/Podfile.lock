@@ -7,7 +7,7 @@ PODS:
   - Locksmith (2.0.8)
   - Nimble (3.0.0)
   - Quick (0.8.0)
-  - SevenPassSDK (1.0.3):
+  - SevenPassSDK (1.1.0):
     - AwesomeCache (~> 2.0)
     - CryptoSwift
     - JSONWebToken
@@ -31,7 +31,7 @@ SPEC CHECKSUMS:
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SevenPassSDK: 373f4bcb5953da25165ed8905fb8cf476335bc15
+  SevenPassSDK: 0c44860756beb8decc88442ec6f608eab974e2c3
 
 PODFILE CHECKSUM: 0e770222a3bf7f526c93372a055a42f54de88011
 
