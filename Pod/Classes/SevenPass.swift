@@ -52,13 +52,13 @@ public class SevenPass: NSObject {
     }
 
     public func accountClient(tokenSet: SevenPassTokenSet, tokenSetUpdated: SevenPassRefreshingClient.TokenSetUpdated? = nil) -> SevenPassRefreshingClient {
-        return SevenPassRefreshingClient(sso: self, baseUri: baseUri("/api/accounts/"), tokenSet: tokenSet, consumerSecret: configuration.consumerSecret, tokenSetUpdated: tokenSetUpdated)
+        return SevenPassRefreshingClient(sso: self, baseUri: baseUri("/api/accounts/"), tokenSet: tokenSet, consumerKey: configuration.consumerKey, consumerSecret: configuration.consumerSecret, tokenSetUpdated: tokenSetUpdated)
     }
 
     public func credentialsClient(tokenSet: SevenPassTokenSet) -> SevenPassClient {
         guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
 
-        return SevenPassClient(baseUri: baseUri("/api/client/"), accessToken: accessToken, consumerSecret: configuration.consumerSecret)
+        return SevenPassClient(baseUri: baseUri("/api/client/"), accessToken: accessToken, consumerKey: configuration.consumerKey, consumerSecret: configuration.consumerSecret)
     }
 
     func initOauthSwift() {
@@ -147,6 +147,7 @@ public class SevenPass: NSObject {
                 self.oauthswift.client.request(config["token_endpoint"] as! String,
                     method: .POST,
                     parameters: parameters,
+                    headers: ["X-Service-Id": self.configuration.consumerKey],
                     success: successHandler,
                     failure: failure
                 )
