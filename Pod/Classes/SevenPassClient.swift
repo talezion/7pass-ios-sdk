@@ -40,8 +40,11 @@ public class SevenPassClient {
     var appsecretProof: String? {
         if let consumerSecret = self.consumerSecret {
             let authenticator = Authenticator.HMAC(key: Array(consumerSecret.utf8), variant: HMAC.Variant.sha256)
-
-            return self.accessToken.authenticate(authenticator)
+            do {
+                return try self.accessToken.authenticate(authenticator)
+            } catch {
+                return nil
+            }
         } else {
             return nil
         }
