@@ -32,8 +32,8 @@ class RegistrationViewController: UIViewController {
             failure: errorHandler
         )
 
-        login.addTarget(self, action: Selector("loginFieldChanged:"), forControlEvents: .EditingChanged)
-        password.addTarget(self, action: Selector("passwordFieldChanged:"), forControlEvents: .EditingChanged)
+        login.addTarget(self, action: #selector(RegistrationViewController.loginFieldChanged(_:)), forControlEvents: .EditingChanged)
+        password.addTarget(self, action: #selector(RegistrationViewController.passwordFieldChanged(_:)), forControlEvents: .EditingChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +60,7 @@ class RegistrationViewController: UIViewController {
         if let timer = loginFieldDebounceTimer {
             timer.invalidate()
         }
-        loginFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: Selector("checkMail"), userInfo: nil, repeats: false)
+        loginFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkMail), userInfo: nil, repeats: false)
         NSRunLoop.currentRunLoop().addTimer(loginFieldDebounceTimer!, forMode: "NSDefaultRunLoopMode")
     }
 
@@ -71,7 +71,7 @@ class RegistrationViewController: UIViewController {
         if let timer = passwordFieldDebounceTimer {
             timer.invalidate()
         }
-        passwordFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: Selector("checkPassword"), userInfo: nil, repeats: false)
+        passwordFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkPassword), userInfo: nil, repeats: false)
         NSRunLoop.currentRunLoop().addTimer(passwordFieldDebounceTimer!, forMode: "NSDefaultRunLoopMode")
     }
 
