@@ -2,6 +2,10 @@
 
 The 7Pass iOS SDK follows [SemVer](http://semver.org/).
 
+- 1.1.1 (2016-04-25)
+  - Compatibility updates for Xcode 7.3
+  - Improve SevenPassClient error handling
+
 - 1.1.0 (2016-03-17)
   - Sends consumerKey as X-Service-Id header value
 
