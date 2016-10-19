@@ -32,8 +32,8 @@ class RegistrationViewController: UIViewController {
             failure: errorHandler
         )
 
-        login.addTarget(self, action: #selector(RegistrationViewController.loginFieldChanged(_:)), forControlEvents: .EditingChanged)
-        password.addTarget(self, action: #selector(RegistrationViewController.passwordFieldChanged(_:)), forControlEvents: .EditingChanged)
+        login.addTarget(self, action: #selector(RegistrationViewController.loginFieldChanged(_:)), for: .editingChanged)
+        password.addTarget(self, action: #selector(RegistrationViewController.passwordFieldChanged(_:)), for: .editingChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,38 +41,38 @@ class RegistrationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func showAlert(title title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
 
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
-    private func errorHandler(error: NSError) {
+    fileprivate func errorHandler(_ error: NSError) {
         showAlert(title: "Error", message: error.localizedDescription)
     }
 
     // Simple login field debouncer
-    var loginFieldDebounceTimer: NSTimer?
+    var loginFieldDebounceTimer: Timer?
 
-    @IBAction func loginFieldChanged(sender: AnyObject) {
+    @IBAction func loginFieldChanged(_ sender: AnyObject) {
         if let timer = loginFieldDebounceTimer {
             timer.invalidate()
         }
-        loginFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkMail), userInfo: nil, repeats: false)
-        NSRunLoop.currentRunLoop().addTimer(loginFieldDebounceTimer!, forMode: "NSDefaultRunLoopMode")
+        loginFieldDebounceTimer = Timer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkMail), userInfo: nil, repeats: false)
+        RunLoop.current.add(loginFieldDebounceTimer!, forMode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"))
     }
 
     // Simple password field debouncer
-    var passwordFieldDebounceTimer: NSTimer?
+    var passwordFieldDebounceTimer: Timer?
 
-    @IBAction func passwordFieldChanged(sender: AnyObject) {
+    @IBAction func passwordFieldChanged(_ sender: AnyObject) {
         if let timer = passwordFieldDebounceTimer {
             timer.invalidate()
         }
-        passwordFieldDebounceTimer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkPassword), userInfo: nil, repeats: false)
-        NSRunLoop.currentRunLoop().addTimer(passwordFieldDebounceTimer!, forMode: "NSDefaultRunLoopMode")
+        passwordFieldDebounceTimer = Timer(timeInterval: 0.5, target: self, selector: #selector(RegistrationViewController.checkPassword), userInfo: nil, repeats: false)
+        RunLoop.current.add(passwordFieldDebounceTimer!, forMode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"))
     }
 
     func checkMail() {
@@ -114,7 +114,7 @@ class RegistrationViewController: UIViewController {
             failure: self.errorHandler)
     }
 
-    @IBAction func signUp(sender: AnyObject) {
+    @IBAction func signUp(_ sender: AnyObject) {
         client.post("registration",
             parameters: [
                 "email": self.login.text!,
