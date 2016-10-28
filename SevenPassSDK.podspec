@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SevenPassSDK"
-  s.version          = "1.1.1"
+  s.version          = "3.1.1"
   s.summary          = "7Pass SDK to access 7Pass SSO features"
 
 # This description is used to generate tags and improve search results.
