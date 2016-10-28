@@ -40,6 +40,7 @@ class SsoManager {
 
         if tokenSet == nil {
             tokenSetCache.delete()
+            accountClient = nil
         } else {
             tokenSetCache.save()
         }

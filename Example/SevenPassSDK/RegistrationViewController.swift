@@ -49,10 +49,6 @@ class RegistrationViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    fileprivate func errorHandler(_ error: NSError) {
-        showAlert(title: "Error", message: error.localizedDescription)
-    }
-
     // Simple login field debouncer
     var loginFieldDebounceTimer: Timer?
 
@@ -86,14 +82,14 @@ class RegistrationViewController: UIViewController {
             success: { json, response in
                 if let error = json["data"]?["error"] as? String {
                     self.loginErrorLabel.text = error
-                    self.loginErrorLabel.hidden = false
+                    self.loginErrorLabel.isHidden = false
                 } else {
                     self.loginErrorLabel.text = nil
-                    self.loginErrorLabel.hidden = true
+                    self.loginErrorLabel.isHidden = true
                 }
 
             },
-            failure: self.errorHandler)
+            failure: errorHandler)
     }
 
     func checkPassword() {
@@ -103,15 +99,15 @@ class RegistrationViewController: UIViewController {
             ],
             success: { json, response in
                 if let errors = json["data"]?["errors"] as? [String] {
-                    self.passwordErrorLabel.text = errors.joinWithSeparator(", ")
-                    self.passwordErrorLabel.hidden = false
+                    self.passwordErrorLabel.text = errors.joined(separator: ", ")
+                    self.passwordErrorLabel.isHidden = false
                 } else {
                     self.passwordErrorLabel.text = nil
-                    self.passwordErrorLabel.hidden = true
+                    self.passwordErrorLabel.isHidden = true
                 }
 
             },
-            failure: self.errorHandler)
+            failure: errorHandler)
     }
 
     @IBAction func signUp(_ sender: AnyObject) {
@@ -128,6 +124,6 @@ class RegistrationViewController: UIViewController {
             success: { json, response in
                 self.showAlert(title: "Result", message: json.description)
             },
-            failure: self.errorHandler)
+            failure: errorHandler)
     }
 }

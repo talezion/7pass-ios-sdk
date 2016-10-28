@@ -199,7 +199,7 @@ class SevenPassIntegration: XCTestCase {
 
     // MARK: - Helper methods
 
-    fileprivate func authorize(_ completion: (SevenPassTokenSet) -> Void) {
+    fileprivate func authorize(_ completion: @escaping (SevenPassTokenSet) -> Void) {
         sevenPass.authorize(
             login: testUsername,
             password: testPassword,
@@ -213,7 +213,7 @@ class SevenPassIntegration: XCTestCase {
         )
     }
 
-    fileprivate func fetchCredentials(_ completion: (SevenPassClient) -> Void) {
+    fileprivate func fetchCredentials(_ completion: @escaping (SevenPassClient) -> Void) {
         sevenPass.authorize(
             parameters: [
                 "grant_type": "client_credentials",

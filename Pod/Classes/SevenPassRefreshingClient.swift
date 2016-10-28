@@ -15,10 +15,10 @@ public class SevenPassRefreshingClient: SevenPassClient {
     let tokenSetUpdatedCallback: TokenSetUpdated?
 
     // MARK: callback alias
-    public typealias TokenSetUpdated = (tokenSet: SevenPassTokenSet) -> Void
+    public typealias TokenSetUpdated = (_ tokenSet: SevenPassTokenSet) -> Void
 
     // MARK: init
-    init(sso: SevenPass, baseUri: NSURL, tokenSet: SevenPassTokenSet, consumerKey: String, consumerSecret: String?, tokenSetUpdated: TokenSetUpdated? = nil) {
+    init(sso: SevenPass, baseUri: URL, tokenSet: SevenPassTokenSet, consumerKey: String, consumerSecret: String?, tokenSetUpdated: TokenSetUpdated? = nil) {
         guard let accessToken = tokenSet.accessToken?.token else { fatalError("accessToken is missing") }
 
         self.sso = sso
@@ -29,20 +29,20 @@ public class SevenPassRefreshingClient: SevenPassClient {
     }
 
     // MARK: methods
-    public override func request(url: String, method: OAuthSwiftHTTPRequest.Method, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public override func request(_ urlString: String, method: OAuthSwiftHTTPRequest.Method, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         ensureFreshTokenSet(
             success: {
-                super.request(url, method: method, parameters: parameters, headers: headers, success: success, failure: { error in
+                super.request(urlString, method: method, parameters: parameters, headers: headers, success: success, failure: { error in
                     // Handle revoked access_tokens
-                    if error.code == 401 {
+                    if error._code == 401 {
                         self.refreshTokenSet(self.tokenSet,
                             success: {
-                                super.request(url, method: method, parameters: parameters, headers: headers, success: success, failure: failure)
+                                super.request(urlString, method: method, parameters: parameters, headers: headers, success: success, failure: failure)
                             },
                             failure: failure
                         )
                     } else {
-                        failure?(error: error)
+                        failure?(error)
                     }
                 })
             },
@@ -50,8 +50,8 @@ public class SevenPassRefreshingClient: SevenPassClient {
         )
     }
 
-    func refreshTokenSet(tokenSet: SevenPassTokenSet, success: () -> Void, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
-        if let refreshToken = tokenSet.refreshToken where !refreshToken.isExpired() {
+    func refreshTokenSet(_ tokenSet: SevenPassTokenSet, success: @escaping () -> Void, failure: SevenPassError.Handler?) {
+        if let refreshToken = tokenSet.refreshToken , !refreshToken.isExpired() {
             sso.authorize(refreshToken: refreshToken.token,
                 success: { tokenSet in
                     self.tokenSet = tokenSet
@@ -60,21 +60,20 @@ public class SevenPassRefreshingClient: SevenPassClient {
                         self.accessToken = accessToken
                     }
 
-                    self.tokenSetUpdatedCallback?(tokenSet: tokenSet)
+                    self.tokenSetUpdatedCallback?(tokenSet)
                     success()
                 },
                 failure: { error in
-                    failure?(error: error)
+                    failure?(error)
                 }
             )
-        } else if let failure = failure {
-            let error = NSError(domain:SevenPassErrorDomain, code:0, userInfo:[NSLocalizedDescriptionKey: "Refresh token is expired"])
-
-            failure(error: error)
+        } else {
+            let error = NSError(domain:SevenPassError.Domain, code:0, userInfo:[NSLocalizedDescriptionKey: "Refresh token is expired"])
+            failure?(error)
         }
     }
 
-    func ensureFreshTokenSet(success success: () -> Void, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    func ensureFreshTokenSet(success: @escaping () -> Void, failure: SevenPassError.Handler?) {
         if tokenSet.accessToken?.isExpired() == false {
             // AccessToken is fresh
             success()

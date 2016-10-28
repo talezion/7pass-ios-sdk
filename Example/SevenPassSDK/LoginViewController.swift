@@ -58,9 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         sso.authorize(login: login.text!, password: password.text!,
             scopes: ["openid", "profile", "email"],
             success: { tokenSet in
-                SsoManager.sharedInstance.updateTokenSet(tokenSet)
-                self.mainView?.updateStatusbar()
-
+                self.updateTokenSet(tokenSet)
                 self.request()
             },
             failure: { error in

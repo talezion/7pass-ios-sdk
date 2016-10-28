@@ -9,5 +9,5 @@
 import OAuthSwift
 
 @objc public protocol SevenPassURLHandlerType: OAuthSwiftURLHandlerType {
-    func destroySession(logoutUrl: NSURL)
+    func destroySession(logoutUrl: URL)
 }
