@@ -34,9 +34,7 @@ public class SevenPassConfiguration {
         self.host = self.hosts[environment]!
     }
   
-    public typealias FailureHandler = (NSError) -> Void
-
-    public func fetch(success success: () -> Void, failure: FailureHandler?) {
+    public func fetch(success: @escaping () -> Void, failure: SevenPassError.Handler?) {
         self.fetchJSON(
             "\(self.host)/.well-known/openid-configuration",
             success: { (configuration) in
@@ -54,33 +52,33 @@ public class SevenPassConfiguration {
 //                    },
 //                    failure: failure
 //                )
-                
+
             },
             failure: failure
         )
     }
 
-    private func fetchJSON(urlString: String, success: (NSDictionary) -> Void, failure: FailureHandler?) {
-        let url = NSURL(string: urlString)
+    private func fetchJSON(_ urlString: String, success: @escaping (NSDictionary) -> Void, failure: SevenPassError.Handler?) {
+        let url = URL(string: urlString)
 
         let cache = try! Cache<NSDictionary>(name: "p7SsoDictionaries")
-        
-        cache.setObjectForKey("fetchJson|\(urlString)",
+
+        cache.setObject(forKey: "fetchJson|\(urlString)",
             cacheBlock: { cacheSuccess, cacheFailure in
-                let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
                     if let error = error {
-                        cacheFailure(error)
+                        cacheFailure(error as NSError)
                         
                         return
                     }
-                    
-                    let response = response as! NSHTTPURLResponse
+
+                    let response = response as! HTTPURLResponse
                     
                     // Throw error when status code >= 400
                     if response.statusCode >= 400 {
-                        let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                        let responseString = String(data: data!, encoding: String.Encoding.utf8)
                         let localizedDescription = "Server responded with HTTP Status: \(response.statusCode), Response: \(responseString)"
-                        let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey: localizedDescription]
+                        let userInfo: [String : Any] = [NSLocalizedDescriptionKey: localizedDescription]
                         let error = NSError(domain: NSURLErrorDomain, code: response.statusCode, userInfo: userInfo)
                         
                         cacheFailure(error)
@@ -90,11 +88,11 @@ public class SevenPassConfiguration {
                    
                     // Parse JSON and cache result
                     do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                        
-                        cacheSuccess(json, .Seconds(60 * 60 * 24 * 90)) // Cache for 90 days
-                    } catch let error as NSError {
-                        cacheFailure(error)
+                        let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+
+                        cacheSuccess(json, .seconds(60 * 60 * 24 * 90)) // Cache for 90 days
+                    } catch let error {
+                        cacheFailure(error as NSError)
                     }
                 }
                 

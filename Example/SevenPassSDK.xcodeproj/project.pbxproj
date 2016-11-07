@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		67A2DBDB1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A2DBDA1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift */; };
-		76EB13124BDF512E1A35448F /* Pods_SevenPassSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56837440C112D2B2222B807D /* Pods_SevenPassSDK_Tests.framework */; };
-		8FD7232DC8D97AEDE89CABB4 /* Pods_SevenPassSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE10333DE3784F822DE97DF /* Pods_SevenPassSDK_Example.framework */; };
+		7DD7DB8BAA60E4331D420B7D /* Pods_SevenPassSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B458C5078A545138F7FF2708 /* Pods_SevenPassSDK_Example.framework */; };
+		AF19E7662045CB7F1B1E30F1 /* Pods_SevenPassSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A96C2AD8095AC4D015683D /* Pods_SevenPassSDK_Tests.framework */; };
 		DBE9D9A41C746230003C39C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9D99C1C746230003C39C3 /* AppDelegate.swift */; };
 		DBE9D9A51C746230003C39C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE9D99D1C746230003C39C3 /* Images.xcassets */; };
 		DBE9D9A71C746230003C39C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE9D99F1C746230003C39C3 /* LoginViewController.swift */; };
@@ -34,19 +34,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15EBD9210AB8297ED12DDDAD /* Pods-SevenPassSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		2AE10333DE3784F822DE97DF /* Pods_SevenPassSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SevenPassSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		56837440C112D2B2222B807D /* Pods_SevenPassSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SevenPassSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BD69ACE72FBE25A3E4700BC /* Pods-SevenPassSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		3353038C8474799C48D3ADEB /* Pods-SevenPassSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D3982363F695954CCFAEF43 /* Pods-SevenPassSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* SevenPassSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SevenPassSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* SevenPassSDK_Example.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SevenPassSDK_Example.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		67A2DBDA1C58D31600A5E8A0 /* SevenPassIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SevenPassIntegrationTests.swift; sourceTree = "<group>"; };
-		6C787958F1CD4C1D60F5CF3A /* Pods-SevenPassSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		70345B3E596D26D6D40178D0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		8F173A962B334DF9E5ADFAD5 /* Pods-SevenPassSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		90391B29D407AB62F05FEA01 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		9584995E27CF2D30BEF6A287 /* Pods-SevenPassSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B1FA242F2C852E2171D0F224 /* Pods-SevenPassSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SevenPassSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		B458C5078A545138F7FF2708 /* Pods_SevenPassSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SevenPassSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBE9D99C1C746230003C39C3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SevenPassSDK/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		DBE9D99D1C746230003C39C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SevenPassSDK/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		DBE9D99F1C746230003C39C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = SevenPassSDK/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -58,6 +57,7 @@
 		DBE9D9AE1C74629F003C39C3 /* SevenPassSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SevenPassSDK.podspec; path = ../SevenPassSDK.podspec; sourceTree = "<group>"; };
 		DBE9D9B11C7462F8003C39C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = SevenPassSDK/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		DBE9D9B31C7462F8003C39C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = SevenPassSDK/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		F5A96C2AD8095AC4D015683D /* Pods_SevenPassSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SevenPassSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FD7232DC8D97AEDE89CABB4 /* Pods_SevenPassSDK_Example.framework in Frameworks */,
+				7DD7DB8BAA60E4331D420B7D /* Pods_SevenPassSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,20 +73,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76EB13124BDF512E1A35448F /* Pods_SevenPassSDK_Tests.framework in Frameworks */,
+				AF19E7662045CB7F1B1E30F1 /* Pods_SevenPassSDK_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		53379A24D85EAED2FA926405 /* Frameworks */ = {
+		4D0E9CFB494003953DCEFECB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2AE10333DE3784F822DE97DF /* Pods_SevenPassSDK_Example.framework */,
-				56837440C112D2B2222B807D /* Pods_SevenPassSDK_Tests.framework */,
+				3D3982363F695954CCFAEF43 /* Pods-SevenPassSDK_Example.debug.xcconfig */,
+				0BD69ACE72FBE25A3E4700BC /* Pods-SevenPassSDK_Example.release.xcconfig */,
+				3353038C8474799C48D3ADEB /* Pods-SevenPassSDK_Tests.debug.xcconfig */,
+				8F173A962B334DF9E5ADFAD5 /* Pods-SevenPassSDK_Tests.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -96,8 +98,8 @@
 				607FACD21AFB9204008FA782 /* Example for SevenPass */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				D6BCA5FEA94871CE9B26A0EF /* Pods */,
-				53379A24D85EAED2FA926405 /* Frameworks */,
+				4D0E9CFB494003953DCEFECB /* Pods */,
+				A89C58DAE9AEC69CBEE2CA2F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,15 +166,13 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		D6BCA5FEA94871CE9B26A0EF /* Pods */ = {
+		A89C58DAE9AEC69CBEE2CA2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9584995E27CF2D30BEF6A287 /* Pods-SevenPassSDK_Example.debug.xcconfig */,
-				6C787958F1CD4C1D60F5CF3A /* Pods-SevenPassSDK_Example.release.xcconfig */,
-				B1FA242F2C852E2171D0F224 /* Pods-SevenPassSDK_Tests.debug.xcconfig */,
-				15EBD9210AB8297ED12DDDAD /* Pods-SevenPassSDK_Tests.release.xcconfig */,
+				B458C5078A545138F7FF2708 /* Pods_SevenPassSDK_Example.framework */,
+				F5A96C2AD8095AC4D015683D /* Pods_SevenPassSDK_Tests.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,12 +182,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SevenPassSDK_Example" */;
 			buildPhases = (
-				38DB5E6392F159BB95F3476D /* Check Pods Manifest.lock */,
+				D7EC8D88ECF29B952E0DFB4D /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				C6884E45114CC98148BC5197 /* Embed Pods Frameworks */,
-				96845462E55B60E4BD69608D /* Copy Pods Resources */,
+				43111FCC51FDF73DCD7550BE /* [CP] Embed Pods Frameworks */,
+				8C52E776D8B48178785DE781 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,12 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "SevenPassSDK_Tests" */;
 			buildPhases = (
-				1204EC946DB27903129B0658 /* Check Pods Manifest.lock */,
+				4D756CD22B8D80A8C991C5AB /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				A4720C67B64FC8F6DC2544B6 /* Embed Pods Frameworks */,
-				C8390C2CF67DC145E3617012 /* Copy Pods Resources */,
+				5E1A2EA9FEACEF893FEBF1F5 /* [CP] Embed Pods Frameworks */,
+				C0F23A1522996A73AD2665B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,15 +226,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = P652PNJR3E;
+						LastSwiftMigration = 0800;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -280,74 +282,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1204EC946DB27903129B0658 /* Check Pods Manifest.lock */ = {
+		43111FCC51FDF73DCD7550BE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		38DB5E6392F159BB95F3476D /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		96845462E55B60E4BD69608D /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A4720C67B64FC8F6DC2544B6 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C6884E45114CC98148BC5197 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,19 +297,79 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C8390C2CF67DC145E3617012 /* Copy Pods Resources */ = {
+		4D756CD22B8D80A8C991C5AB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5E1A2EA9FEACEF893FEBF1F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C52E776D8B48178785DE781 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Example/Pods-SevenPassSDK_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0F23A1522996A73AD2665B7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SevenPassSDK_Tests/Pods-SevenPassSDK_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7EC8D88ECF29B952E0DFB4D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -428,6 +430,7 @@
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -438,8 +441,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -473,6 +478,7 @@
 		607FACEE1AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -483,8 +489,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -503,48 +511,58 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9584995E27CF2D30BEF6A287 /* Pods-SevenPassSDK_Example.debug.xcconfig */;
+			baseConfigurationReference = 3D3982363F695954CCFAEF43 /* Pods-SevenPassSDK_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SevenPassSDK/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SevenPassSDK_Example;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C787958F1CD4C1D60F5CF3A /* Pods-SevenPassSDK_Example.release.xcconfig */;
+			baseConfigurationReference = 0BD69ACE72FBE25A3E4700BC /* Pods-SevenPassSDK_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SevenPassSDK/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SevenPassSDK_Example;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1FA242F2C852E2171D0F224 /* Pods-SevenPassSDK_Tests.debug.xcconfig */;
+			baseConfigurationReference = 3353038C8474799C48D3ADEB /* Pods-SevenPassSDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -553,20 +571,24 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SevenPassSDK_Example;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SevenPassSDK_Example.app/SevenPassSDK_Example";
 			};
 			name = Debug;
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15EBD9210AB8297ED12DDDAD /* Pods-SevenPassSDK_Tests.release.xcconfig */;
+			baseConfigurationReference = 8F173A962B334DF9E5ADFAD5 /* Pods-SevenPassSDK_Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SevenPassSDK_Example;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SevenPassSDK_Example.app/SevenPassSDK_Example";
 			};
 			name = Release;

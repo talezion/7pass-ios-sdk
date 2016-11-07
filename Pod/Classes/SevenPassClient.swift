@@ -12,26 +12,26 @@ import CryptoSwift
 public class SevenPassClient {
     public let consumerKey: String
     public let consumerSecret: String?
-    public var baseUri: NSURL = NSURL()
+    public var baseUri: URL
     private let oAuthSwiftClient: OAuthSwiftClient
 
     var accessToken: String {
         get {
-            return oAuthSwiftClient.credential.oauth_token
+            return oAuthSwiftClient.credential.oauthToken
         }
         set {
-            oAuthSwiftClient.credential.oauth_token = newValue
+            oAuthSwiftClient.credential.oauthToken = newValue
         }
     }
 
-    public typealias SuccessHandler = (json: Dictionary<String, AnyObject>, response: NSHTTPURLResponse) -> Void
+    public typealias SuccessHandler = (_ json: Dictionary<String, AnyObject>, _ response: HTTPURLResponse) -> Void
 
-    public init(baseUri: NSURL, accessToken: String, consumerKey: String, consumerSecret: String?) {
+    public init(baseUri: URL, accessToken: String, consumerKey: String, consumerSecret: String?) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
         
         self.oAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
-        self.oAuthSwiftClient.credential.version = .OAuth2
+        self.oAuthSwiftClient.credential.version = .oauth2
 
         self.baseUri = baseUri
         self.accessToken = accessToken
@@ -39,9 +39,9 @@ public class SevenPassClient {
 
     var appsecretProof: String? {
         if let consumerSecret = self.consumerSecret {
-            let authenticator = Authenticator.HMAC(key: Array(consumerSecret.utf8), variant: HMAC.Variant.sha256)
             do {
-                return try self.accessToken.authenticate(authenticator)
+                let hmac = try HMAC(key: Array(consumerSecret.utf8), variant: .sha256).authenticate(Array(self.accessToken.utf8))
+                return hmac.toHexString()
             } catch {
                 return nil
             }
@@ -51,29 +51,32 @@ public class SevenPassClient {
     }
 
     // MARK: client methods
-    public func get(urlString: String, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public func get(_ urlString: String, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         self.request(urlString, method: .GET, parameters: parameters, headers: headers, success: success, failure: failure)
     }
 
-    public func post(urlString: String, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public func post(_ urlString: String, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         self.request(urlString, method: .POST, parameters: parameters, headers: headers, success: success, failure: failure)
     }
 
-    public func put(urlString: String, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public func put(_ urlString: String, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         self.request(urlString, method: .PUT, parameters: parameters, headers: headers,success: success, failure: failure)
     }
 
-    public func delete(urlString: String, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public func delete(_ urlString: String, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         self.request(urlString, method: .DELETE, parameters: parameters, headers: headers,success: success, failure: failure)
     }
 
-    public func patch(urlString: String, parameters: [String: AnyObject] = [:], headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    public func patch(_ urlString: String, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         self.request(urlString, method: .PATCH, parameters: parameters, headers: headers,success: success, failure: failure)
     }
 
-    public func request(var url: String, method: OAuthSwiftHTTPRequest.Method, var parameters: [String: AnyObject] = [:], var headers: [String:String] = [:], success: SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
+    // TODO: implement OAuthSwiftRequestHandle?
+    public func request(_ urlString: String, method: OAuthSwiftHTTPRequest.Method, parameters: OAuthSwift.Parameters = [:], headers: OAuthSwift.Headers = [:], success: SuccessHandler?, failure: SevenPassError.Handler?) {
         // Prepend base uri
-        url = NSURL(string: url, relativeToURL: self.baseUri)!.absoluteString
+        var headers = headers
+        let url = URL(string: urlString, relativeTo: self.baseUri)!.absoluteString
+        var parameters = parameters
         parameters["appsecret_proof"] = appsecretProof
 
         headers["X-Service-Id"] = self.consumerKey
@@ -86,16 +89,16 @@ public class SevenPassClient {
             let json: Dictionary<String, AnyObject>
 
             do {
-                json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! Dictionary<String, AnyObject>
-            } catch {
-                failure?(error: error as NSError)
+                json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String, AnyObject>
+            } catch let error {
+                failure?(error as NSError)
 
                 return
             }
 
-            success?(json: json, response: response)
+            success?(json, response)
         }
 
-        return oAuthSwiftClient.request(url, method: method, parameters: parameters, headers: headers, success: successHandler, failure: failure)
+        oAuthSwiftClient.request(url, method: method, parameters: parameters, headers: headers, success: successHandler, failure: SevenPassError.handler(success: nil, failure: failure))
     }
 }

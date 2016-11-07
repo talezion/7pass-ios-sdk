@@ -27,7 +27,7 @@ public struct SevenPassTokenSetCache: ReadableSecureStorable, CreateableSecureSt
     }
 
     // Required by CreateableSecureStorable
-    public var data: [String: AnyObject] {
+    public var data: [String: Any] {
         guard let tokenSet = tokenSet else { fatalError("tokenSet is missing") }
 
         return [

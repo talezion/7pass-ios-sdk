@@ -8,21 +8,21 @@
 
 import UIKit
 
-func showAlert(title title: String, message: String) {
-    if let topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+func showAlert(title: String, message: String) {
+    if let topController = UIApplication.shared.keyWindow?.rootViewController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
 
         // Delay alert by 0.5s, so it doesn't collide with a WebView presentation
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, 500000000)
+        let dispatchTime = DispatchTime.now() + Double(500000000) / Double(NSEC_PER_SEC)
 
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            topController.presentViewController(alertController, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            topController.present(alertController, animated: true, completion: nil)
         })
     }
 }
 
-func errorHandler(error: NSError) {
+func errorHandler(_ error: NSError) {
     showAlert(title: "Error", message: error.localizedDescription)
 }

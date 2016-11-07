@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        mainView = parentViewController as? ViewController
+        mainView = parent as? ViewController
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func webview(sender: AnyObject) {
+    @IBAction func webview(_ sender: AnyObject) {
         sso.authorize(
             scopes: ["openid", "profile", "email"],
             success: { tokenSet in
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         )
     }
 
-    @IBAction func autologin(sender: AnyObject) {
+    @IBAction func autologin(_ sender: AnyObject) {
         if let tokenSet = SsoManager.sharedInstance.tokenSet {
             sso.autologin(tokenSet,
                 scopes: ["openid", "profile", "email"],
@@ -54,18 +54,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    @IBAction func loginPasswordLogin(sender: AnyObject) {
+    @IBAction func loginPasswordLogin(_ sender: AnyObject) {
         sso.authorize(login: login.text!, password: password.text!,
             scopes: ["openid", "profile", "email"],
             success: { tokenSet in
-                SsoManager.sharedInstance.updateTokenSet(tokenSet)
-                self.mainView?.updateStatusbar()
-
+                self.updateTokenSet(tokenSet)
                 self.request()
             },
             failure: { error in
                 // Let autologin handle interaction_required errors
-                if let errorMessage = error.userInfo["error"] as? String where errorMessage == "interaction_required" {
+                if let errorMessage = error.userInfo["error"] as? String , errorMessage == "interaction_required" {
                     let autologinToken = error.userInfo["autologin_token"] as! String
 
                     self.sso.autologin(
@@ -85,7 +83,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         )
     }
 
-    @IBAction func request(sender: AnyObject? = nil) {
+    @IBAction func request(_ sender: AnyObject? = nil) {
         if let accountClient = SsoManager.sharedInstance.accountClient {
             accountClient.get("me",
                 success: { json, response in
@@ -102,13 +100,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    func updateTokenSet(tokenSet: SevenPassTokenSet) {
+    func updateTokenSet(_ tokenSet: SevenPassTokenSet) {
         SsoManager.sharedInstance.updateTokenSet(tokenSet)
         SsoManager.sharedInstance.setAccountClient()
         mainView?.updateStatusbar()
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         loginPasswordLogin(textField)
 
         return true
